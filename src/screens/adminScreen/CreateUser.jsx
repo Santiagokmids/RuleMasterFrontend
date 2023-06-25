@@ -19,7 +19,9 @@ function Createuser() {
           <h1 className="mainTitle">Datos del usuario</h1>
           <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw"/>
           <FormInput type="text" placeholder="Apellido" h="5vh" w="34vw" />
-          <FormInput type="text" placeholder="Email"  h="5vh" w="34vw"/>
+          <FormInput type="email" placeholder="Email"  h="5vh" w="34vw"/>
+          <FormInput type="password" placeholder="Contraseña"  h="5vh" w="34vw"/>
+          
           <Dropdown h="5vh" w="34vw" t="4vh"/>
           <div className="formComponent">
             <Button h="5vh" w="34vw" text="Hola" /> 

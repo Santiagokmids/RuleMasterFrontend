@@ -4,7 +4,7 @@ import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
 
 function App() {
-  let juan = 2;
+  let juan = 1;
   if (juan === 2) {
     return (
       <CreateUser />
