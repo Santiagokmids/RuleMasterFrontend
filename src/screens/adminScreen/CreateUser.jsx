@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Dropdown } from "react-bootstrap";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import React from "react";
+import Dropdown from "../../componente/Dropdown";
 import Header from "../../componente/Header";
 import FormInput from "../../componente/FormInput";
 
@@ -25,27 +22,7 @@ function Createuser() {
             <FormInput type="text" placeholder="Email"  h="5vh" w="70vh"/>
           </div>
 
-          <div className="formComponent">
-            <Dropdown onToggle={closeOpenDropdown}  >
-              <DropdownToggle
-                caret
-                className="rolDropDown"
-                value={dropValue}
-                onChange={(event) => {
-                  setDropValue(event.target.value);
-                }}
-              >
-                Rol
-              </DropdownToggle>
-
-              <DropdownMenu>
-                <DropdownItem>Administrador</DropdownItem>
-                <DropdownItem>Gerente reglas</DropdownItem>
-                <DropdownItem>Evaluador de reglas</DropdownItem>
-                <DropdownItem>Admin</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          <Dropdown h="5vh" w="70vh"/>
           <div className="formComponent">
             <button>Crear Usuario</button>
           </div>

@@ -1,8 +1,23 @@
 .formComponent {
+
   margin-top: 4vh;
+  margin-bottom: 4vh;
 }
 
 .formInput{
   border-radius: 8px;
   border-color: #b3b1b17c;
+  color: black;
+  font-size: 1.2em;
+  font-weight: 800;
+  padding-left: 10px;
 }
+
+.formInput::placeholder {
+  color: #666;
+  font-size: 1.2em;
+  font-weight: 800;
+  padding-left: 5px;
+}
+
+
