@@ -1,13 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './componente/Header';
 import CreateUser from './screens/adminScreen/CreateUser';
+import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
 
 function App() {
-  return (
-    <CreateUser />
-  );
+  let juan = 2;
+  if (juan === 2) {
+    return (
+      <CreateUser />
+    );
+  } else {
+    return (
+      <ControlPanelAdmin />
+    );
+  }
 }
 
 export default App;
