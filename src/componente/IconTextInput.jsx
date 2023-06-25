@@ -5,7 +5,7 @@ function IconTextInput(props) {
   const [inputValue, setInputValue] = React.useState("");
 
   return (
-    <div className="IconTextInputWrapper">
+    <div className="IconTextInputWrapper" style={{width: props.w, height: props.h, margin: props.margin}}>
       <ion-icon name={props.icon}></ion-icon>
       <div className="IconTextInputContainer">
         <input
