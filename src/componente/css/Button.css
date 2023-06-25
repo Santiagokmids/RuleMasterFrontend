@@ -1,0 +1,9 @@
+.buttonStyle{
+    border-radius: 10px;
+    background: #4786FF;
+    border-color: #6666664f;
+    color: #FFF;
+    font-size: 3vh;
+    font-family: Poppins;
+    font-weight: 600;
+}

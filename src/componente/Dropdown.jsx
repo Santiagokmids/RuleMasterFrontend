@@ -13,7 +13,7 @@ const selectOptions = [
 
 function Dropdown(props) {
   const [dropValue, setDropValue] = React.useState();
-  const { w, h } = props;
+  const { w, h, t} = props;
 
   const handleSelect = (event) => {
     setDropValue(event.value);
@@ -53,7 +53,7 @@ function Dropdown(props) {
   React.useEffect(() => { }, [dropValue]);
 
   return (
-    <div className="DropdownContainer" style={{ width: w, height: h}}>
+    <div className="DropdownContainer" style={{ width: w, height: h, marginTop: t}}>
       <Select
         defaultValue={{ label: "Rol", value: "" }}
         options={selectOptions}

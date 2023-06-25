@@ -5,6 +5,7 @@ import FormInput from "../../componente/FormInput";
 
 
 import "./css/CreateUser.css";
+import Button from "../../componente/Button";
 
 function Createuser() {
   const [dropValue, setDropValue] = React.useState(false);
@@ -16,15 +17,12 @@ function Createuser() {
       <body className="body">
         <div className="containerBase">
           <h1 className="mainTitle">Datos del usuario</h1>
-          <div>
-            <FormInput type="text" placeholder="Nombre" h="5vh" w="70vh"/>
-            <FormInput type="text" placeholder="Apellido" h="5vh" w="70vh" />
-            <FormInput type="text" placeholder="Email"  h="5vh" w="70vh"/>
-          </div>
-
-          <Dropdown h="5vh" w="70vh"/>
+          <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw"/>
+          <FormInput type="text" placeholder="Apellido" h="5vh" w="34vw" />
+          <FormInput type="text" placeholder="Email"  h="5vh" w="34vw"/>
+          <Dropdown h="5vh" w="34vw" t="4vh"/>
           <div className="formComponent">
-            <button>Crear Usuario</button>
+            <Button h="5vh" w="34vw" text="Hola" /> 
           </div>
         </div>
       </body>
