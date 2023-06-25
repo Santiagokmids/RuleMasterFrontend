@@ -1,0 +1,17 @@
+.formComponent {
+
+  margin-top: 4vh;
+}
+
+.formInput{
+  border-radius: 8px;
+  border-color: #b3b1b17c;
+  color: black;
+  font-size: 1.2em;
+  font-weight: 800;
+  padding-left: 0.5vw;
+}
+
+
+
+
