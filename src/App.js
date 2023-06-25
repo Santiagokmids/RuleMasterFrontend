@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
+import IconTextInput from './componente/IconTextInput';
 
-function App() {
+/*function App() {
   let juan = 2;
   if (juan === 2) {
     return (
@@ -14,6 +15,11 @@ function App() {
       <ControlPanelAdmin />
     );
   }
-}
+}  */
 
+function App() {
+  return (
+    <IconTextInput type = "text" placeholder = "panita" icon = "search-outline" />
+  );
+}
 export default App;
