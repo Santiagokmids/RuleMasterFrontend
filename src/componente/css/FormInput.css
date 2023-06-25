@@ -1,5 +1,8 @@
 .formComponent {
-  margin-top: 2%;
-  margin-bottom: 2%;
-  width:500px;
+  margin-top: 4vh;
+}
+
+.formInput{
+  border-radius: 8px;
+  border-color: #b3b1b17c;
 }
