@@ -3,10 +3,10 @@ import "./css/Button.css";
 
 
 export default function Button(props) {
-    const { w, h, text} = props;
+    const { w, h, text, marginT, marginL} = props;
     return (
       <div>
-          <button style={{ width: w, height: h}} className="buttonStyle">{text}</button>
+          <button style={{ width: w, height: h, marginTop: marginT, marginLeft: marginL}} className="buttonStyle">{text}</button>
       </div>
     )
 }
