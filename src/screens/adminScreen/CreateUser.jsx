@@ -24,7 +24,7 @@ function Createuser() {
           
           <Dropdown h="5vh" w="34vw" t="4vh"/>
           <div className="formComponent">
-            <Button h="5vh" w="34vw" text="Hola" /> 
+            <Button h="5vh" w="34vw" text="Confirmar" /> 
           </div>
         </div>
       </body>
