@@ -1,30 +1,33 @@
 .header {
     background-color: #4786ff;
-    display: flex;
     justify-content: space-between;
     height: 12vh;
 
 }
 
+.buttonContainer{
+  width: 50%;
+  float: right;
+}
 
 .tittle-1 {
-    flex: 1;
     color: #ffffff;
     text-align: left;
     font: 400 6vh 'Playfair Display', sans-serif;
     position: absolute;
     padding-left: 4vw;
     top: 2vh;
+    width: 50%;
+    float: left;
 }
 
 .button {
     top: 2.8vh;
-    position: absolute;
+    position: relative;
     right: 3vw;
     background: #ffffff;
     border-radius: 10px;
     border: 1px solid #a2a1a136;
-    display: flex;
     align-items: center;
     justify-content: center;
     color: #666666b7;
@@ -33,13 +36,12 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
     width: auto;
     padding: 1vh 2vw;
     margin-top: 0.1vh;
-    margin-bottom: 0.1vh
+    margin-bottom: 0.1vh;
+    float: right;
   }
   
   .button:hover {

@@ -7,9 +7,11 @@ import ButtonIcon from './componente/ButtonIcon'
 import ControlePanelRecordManagement from './screens/recordManagementScreen/ControlePanelRecordManagement';
 import AddRule from './screens/recordManagementScreen/AddRule';
 import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
+import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute'
+import PopUpDropdown from './componente/PopUpDropdown';
 
 function App() {
-  let juan = 5;
+  let juan = 2;
   switch (juan) {
     case 1:
       return (
@@ -31,6 +33,14 @@ function App() {
       return (
         <ControlPanelRuleManagement />
       );
+    case 6:
+      return (
+        <ControlPanelAttribute />
+      )
+    case 7:
+      return (
+        <PopUpDropdown />
+      )
     default:
 
   }

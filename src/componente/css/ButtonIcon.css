@@ -9,26 +9,33 @@ ion-icon {
   border-color: #d9d9d9;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
   border-radius: 10px;
   background: #d9d9d9;
-
   flex-shrink: 0;
+  padding-left: 1vw;
+
 }
 
 .textContainer{
-  height: 90%;
-    border-left: 1px solid black;
-}
-
-.textContainer1 {
-  border: none;
-  border-left-color: black;
-  background: #d9d9d9;
-  font-family: Poppins;
+  margin-left: 0.5vw;
+  text-align: center;
+  align-items: center;
   color: black;
+  font-family: Poppins;
   font-size: 1.2em;
   font-weight: 800;
-  padding-left: 0.5vw;
+}
 
+.textStyle{
+  border-left: 1px solid black;
+  padding-left: 0.5vw;
+  text-align: center;
+  color: black;
+  font-family: Poppins;
+  font-size: 1.2em;
+  font-weight: 800;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }

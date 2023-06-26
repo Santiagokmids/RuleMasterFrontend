@@ -2,12 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 
-const selectOptions = [
-  { label: "Gestor de registros", value: "Gestor de registros" },
-  { label: "Gestor de reglas", value: "Gestor de reglas" },
-  { label: "Evaluador de reglas", value: "Evaluador de reglas" },
-  { label: "Gestor de ??????(Columns) Ingles VIII", value: "Gestor de ??????(Columns) Ingles VIII" },
-];
+
 
 
 
@@ -56,7 +51,7 @@ function Dropdown(props) {
     <div className="DropdownContainer" style={{ width: w, height: h, marginTop: t}}>
       <Select
         defaultValue={{ label: "Rol", value: "" }}
-        options={selectOptions}
+        options={props.selectOptions}
         onChange={handleSelect}
         className="select-text"
         styles={customStyles}

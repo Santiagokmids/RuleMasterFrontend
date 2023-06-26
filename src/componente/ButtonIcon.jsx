@@ -8,7 +8,7 @@ function ButtonIcon(props) {
     <button className="ButtonInputWrapper" style={{width: w, height: h, marginLeft: marginL, marginTop: marginT}}>
       <ion-icon name={img}></ion-icon>
       <div className="textContainer">
-        <p className="textContainer1">{text}</p>
+        <p className="textStyle">{text}</p>
       </div>
     </button>
   );

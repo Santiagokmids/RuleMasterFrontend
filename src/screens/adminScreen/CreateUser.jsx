@@ -22,7 +22,12 @@ function Createuser() {
           <FormInput type="email" placeholder="Email"  h="5vh" w="34vw"/>
           <FormInput type="password" placeholder="Contraseña"  h="5vh" w="34vw"/>
           
-          <Dropdown h="5vh" w="34vw" t="4vh"/>
+          <Dropdown selectOptions={[
+  { label: "Gestor de registros", value: "Gestor de registros" },
+  { label: "Gestor de reglas", value: "Gestor de reglas" },
+  { label: "Evaluador de reglas", value: "Evaluador de reglas" },
+  { label: "Gestor de ??????(Columns) Ingles VIII", value: "Gestor de ??????(Columns) Ingles VIII" },
+]} h="5vh" w="34vw" t="4vh"/>
           <div className="formComponent">
             <Button h="5vh" w="34vw" text="Confirmar" /> 
           </div>

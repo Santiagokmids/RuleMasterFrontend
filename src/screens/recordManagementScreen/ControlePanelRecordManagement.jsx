@@ -15,7 +15,7 @@ export default function ControlePanelRecordManagement() {
           <div className="containerBase2">
             <ButtonIcon marginL="1vw" marginT="1vw" text = "Crear registro"  w="24vw" h="6vh" img="reader-outline"/>
             <ButtonIcon marginL="1vw" marginT="1vw" text = "Gestionar registro"  w="24vw" h="6vh" img="settings-outline"/>
-            <Button text = "Gestionar Usuario"  w="24vw" h="6vh" marginL="1vw" marginT="1vw"/>
+            <Button text = "Evaluar registro"  w="24vw" h="6vh" marginL="1vw" marginT="1vw"/>
 
             
 
