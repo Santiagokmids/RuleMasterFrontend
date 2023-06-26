@@ -5,12 +5,14 @@ function ButtonIcon(props) {
   const { w, h, text, img, marginL ,marginT} = props;
 
   return (
-    <button className="ButtonInputWrapper" style={{width: w, height: h, marginLeft: marginL, marginTop: marginT}}>
+    <div style={{width: w, height: h, marginLeft: marginL, marginTop: marginT}}>
+    <button className="ButtonInputWrapper" >
       <ion-icon name={img}></ion-icon>
       <div className="textContainer">
         <p className="textStyle">{text}</p>
       </div>
     </button>
+    </div>
   );
 }
 

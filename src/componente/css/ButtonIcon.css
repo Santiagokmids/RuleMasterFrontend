@@ -6,6 +6,8 @@ ion-icon {
 
 
 .ButtonInputWrapper {
+  height: 100%;
+  width: 100%;
   border-color: #d9d9d9;
   display: flex;
   align-items: center;
@@ -34,8 +36,9 @@ ion-icon {
   font-family: Poppins;
   font-size: 1.2em;
   font-weight: 800;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 10%;
-  padding-bottom: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  
 }
