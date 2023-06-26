@@ -29,7 +29,7 @@ function Dropdown(props) {
       border: "1px solid #666",
       background: "#f2f2f2",
       boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-      borderRadius: "10px", // Ajusta el radio de borde deseado
+      borderRadius: "10px", // Ajusta el radio de borde deseado 
       width: w,
       height: h,
       fontFamily: "'Josefin Sans', sans-serif",
