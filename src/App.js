@@ -4,12 +4,12 @@ import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
 import IconTextInput from './componente/IconTextInput';
 import ButtonIcon from './componente/ButtonIcon'
-import Calculator from './screens/ruleManagementScreen/CalculatorScreen';
 import ControlePanelRecordManagement from './screens/recordManagementScreen/ControlePanelRecordManagement';
 import AddRule from './screens/recordManagementScreen/AddRule';
+import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
 
 function App() {
-  let juan = 4;
+  let juan = 5;
   switch (juan) {
     case 1:
       return (
@@ -29,7 +29,7 @@ function App() {
       )
     case 5:
       return (
-        <Calculator />
+        <ControlPanelRuleManagement />
       );
     default:
 

@@ -18,8 +18,8 @@
 }
 
 .result {
-  width: 40vw;
-  height: 5vh;
+  width: 50vw;
+  height: 6vh;
   flex-shrink: 0;
   border-radius: 15px;
   border: 1px solid rgba(102, 102, 102, 0.5);
@@ -29,6 +29,7 @@
 
 .operationsContainer {
   height: 28vh;
+  width: 80vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
