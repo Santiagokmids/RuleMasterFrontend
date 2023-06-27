@@ -1,0 +1,16 @@
+.ButtonContainer {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    background: #dedede54;
+    border-radius: 0px 0px 30px 30px;
+  }
+
+  .css-b62m3t-container {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+}

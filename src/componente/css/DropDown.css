@@ -1,0 +1,84 @@
+.css-1r7149a-control {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: default;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    min-height: 38px;
+    outline: 0!important;
+    position: relative;
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+    background-color: hsl(0, 0%, 100%);
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 10px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) !important;
+    box-sizing: border-box;
+    border: 0px !important;
+    background: #ffffff00 !important;
+    width: 100%;
+    height: 100%;
+    font-family: 'Josefin Sans',sans-serif;
+    text-align: left;
+    color: #909190 !important;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.css-b62m3t-container{
+    border-radius: 8px;
+    border-top: 2px solid #b1b1b1 !important;
+    border-left: 2px solid #b1b1b1 !important;
+    border-bottom: 2px solid #dad9d9 !important;
+    border-right: 2px solid #dad9d9 !important;
+    background: #ffffff !important;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) !important;
+}
+
+.css-12i6kiq-control:hover {
+    border-color: #ffffff00 !important;
+    border: 0px #ffffff00 !important;
+}
+
+.css-12i6kiq-control {
+    border-color: #ffffff00 !important;
+    border: 0px #ffffff00 !important;
+}
+.css-119qvk0-control {
+    border: 0px solid #666 !important;
+}
+
+.css-12wuqfi-control{
+    background: #ffffff !important;
+    min-height: 0px !important;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) !important;
+    
+}
+
+.css-1dimb5e-singleValue{
+    color: hsl(0deg 0% 45.88%);
+}
+
+.css-74ytlk-control{
+    min-height: 0px !important;
+
+}
+
+.css-1nmdiq5-menu{
+    margin-top: 0px !important;
+}
+
+

@@ -9,9 +9,10 @@ import AddRule from './screens/recordManagementScreen/AddRule';
 import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
 import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute'
 import PopUpDropdown from './componente/PopUpDropdown';
+import Login from './screens/Login';
 
 function App() {
-  let juan = 1;
+  let juan = 7;
   switch (juan) {
     case 1:
       return (
@@ -39,7 +40,7 @@ function App() {
       )
     case 7:
       return (
-        <PopUpDropdown />
+        <Login />
       )
     default:
 
