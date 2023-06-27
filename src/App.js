@@ -7,9 +7,10 @@ import ButtonIcon from './componente/ButtonIcon'
 import ControlePanelRecordManagement from './screens/recordManagementScreen/ControlePanelRecordManagement';
 import AddRule from './screens/recordManagementScreen/AddRule';
 import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
+import Login from './screens/Login';
 
 function App() {
-  let juan = 5;
+  let juan = 6;
   switch (juan) {
     case 1:
       return (
@@ -32,7 +33,7 @@ function App() {
         <ControlPanelRuleManagement />
       );
     default:
-
+        return (<Login />);
   }
 }
 

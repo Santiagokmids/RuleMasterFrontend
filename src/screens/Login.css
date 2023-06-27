@@ -1,0 +1,60 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../img/loginBackground.jpeg");
+}
+
+.loginContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 80vh;
+  width: 80vw;
+  border-radius: 15px;
+  border-bottom: 1px solid rgba(102, 102, 102, 0.5);
+  background: #ddf3ff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.loginTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-bottom: 1.5px solid #000000;
+}
+
+.logButton {
+  margin-top: 5vh;
+}
+
+.textCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-right: 30vw;
+}
+
+.coffeImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 39%;
+  height: auto;
+}
+
+.loginBackground {
+  width: 100vw;
+  height: 100vh;
+}
