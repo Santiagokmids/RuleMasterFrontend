@@ -118,9 +118,52 @@ export default function ControlPanelRuleManagement() {
     <div>
         <Header buttonText="Cerrar sesión" headerText="Panel de control" />
       <div className="logicalContainer">
-        <div className="imageContainer" style={{marginTop: "4vh", marginBottom: "5vh"}}>
-            <img className="exampleBd" src={dataBaseExample} alt="" />
+        <div >
+            <h3>Datos</h3>
+            <table className="">
+              <thead>
+                <tr>
+                  {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                    <th  key={index} className="">
+                      {columnName} - {tableData.columnTypes[index]}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+              {tableData.records && tableData.records.map((record, recordIndex) => (
+              <tr key={recordIndex}>
+                <td>{record.record_id}</td>
+                {Object.keys(record).map((key) => (
+                  key !== "record_id" && <td key={key}>{record[key]}</td>
+                ))}
+              </tr>
+            ))}
+              </tbody>
+          </table>
         </div>
+
+
+        <div>
+          <h3>Reglas</h3>
+          <table className="">
+            <thead>
+                <tr>
+                <th >Nombre </th>
+                <th >Regla</th>
+                </tr>
+            </thead>
+            <tbody>
+              {rules.map((rule, index) => (
+                <tr key={index}>
+                  <td>{rule.ruleName}</td>
+                  <td>{rule.ruleDefinition}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <div>
             <div className="resultContainer">
                     <input type="text" className="result" placeholder="Regla" value={ruleValue}disabled/>
@@ -138,8 +181,8 @@ export default function ControlPanelRuleManagement() {
                   onChange={handleColumnChange}
                 >
                     <option value="">Columna</option>
-                    {tableData.columnNames.map((columnName, index) => (
-                            <option key={index}>{columnName}</option>
+                    {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                         columnName !== "record_id"  && <option key={index}>{columnName}</option>
                     ))}
                    
                     
@@ -169,8 +212,8 @@ export default function ControlPanelRuleManagement() {
                     onChange={handleColumn2Change}
                   >
                       <option value="">Columna</option>
-                      {tableData.columnNames.map((columnName, index) => (
-                            <option key={index}>{columnName}</option>
+                      {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                           columnName !== "record_id"  &&  <option key={index}>{columnName}</option>
                     ))}
                   </select>
                   
