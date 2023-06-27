@@ -14,6 +14,10 @@ export default function ControlPanelRuleManagement() {
   const [selectedColumn2, setSelectedColumn2] = useState('');
   const [inputValue, setInputValue] = useState('');
 
+  const [tableData, setTableData] = useState([]);
+  const [rules, setRules] = useState([]);
+
+  const baseUrl="http://localhost:8091";
 
   function handleColumnChange(event) {
     const selectedOption = event.target.value;
@@ -81,6 +85,35 @@ export default function ControlPanelRuleManagement() {
     setRuleValue('');
   };
 
+  useEffect(()=>{
+    const fetchTable = async () => {
+      const response = await axios.get(
+          baseUrl + "/table/table_data",
+          { headers: { 
+              "Access-Control-Allow-Origin":baseUrl,
+              "MediaType":"application/json"
+          } }
+          );
+      const responseData = response.data;
+      setTableData(responseData);
+    };
+    fetchTable();
+
+  const fetchRules = async () => {
+    const response = await axios.get(
+        baseUrl + "/rules",
+        { headers: { 
+            "Access-Control-Allow-Origin":baseUrl,
+            "MediaType":"application/json"
+        } }
+        );
+    const responseData = response.data;
+    setRules(responseData);
+  };
+  fetchRules();
+
+  }, []);
+
   return (
     <div>
         <Header buttonText="Cerrar sesión" headerText="Panel de control" />
@@ -93,7 +126,7 @@ export default function ControlPanelRuleManagement() {
                     <input type="text" className="result" placeholder="Regla" value={ruleValue}disabled/>
                     <button className="result" style={{width: "4vw", marginLeft: "0.5vw"}} onClick={handleClickCleanAll}><ion-icon name="arrow-back-outline"></ion-icon></button>
                     <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw"/>
-                    <Button text="Gestionar regla" w="12vw" h="6vh" marginL="0.6vw" />
+                    {/* <Button text="Gestionar regla" w="12vw" h="6vh" marginL="0.6vw" />*/}
             </div>
 
             <div className="operationsContainer">
@@ -105,6 +138,11 @@ export default function ControlPanelRuleManagement() {
                   onChange={handleColumnChange}
                 >
                     <option value="">Columna</option>
+                    {tableData.columnNames.map((columnName, index) => (
+                            <option key={index}>{columnName}</option>
+                    ))}
+                   
+                    
                 </select>
                 <ButtonType1 marginL="2vw" marginT="2vh" text={<div>(</div>} onClick={handleClickOpeningBracket} w="10vw" h="15vh" />
                 <ButtonType1 marginL="2vw" marginT="2vh" text={<div>)</div>} onClick={handleClickFinalBracket} w="10vw" h="15vh" />
@@ -117,7 +155,7 @@ export default function ControlPanelRuleManagement() {
                   <ButtonType1 marginL="2vw" marginT="2vh" text="Verdadero" onClick={handleClickTrue} w="8vw" h="6vh" />
                   <ButtonType1 marginL="2vw" marginT="2vh" text="Falso" onClick={handleClickFalse} w="8vw" h="6vh" />
 
-                  </div>
+                </div>
 
 
                 <div className="logicalContainer">
@@ -131,6 +169,9 @@ export default function ControlPanelRuleManagement() {
                     onChange={handleColumn2Change}
                   >
                       <option value="">Columna</option>
+                      {tableData.columnNames.map((columnName, index) => (
+                            <option key={index}>{columnName}</option>
+                    ))}
                   </select>
                   
                   <input type="text" className="" placeholder="Valor" value={inputValue}  onChange={handleInputValueChange}/>
