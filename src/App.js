@@ -11,15 +11,18 @@ import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPa
 import PopUpDropdown from './componente/PopUpDropdown';
 import Login from './screens/Login';
 
+
 function App() {
-    
+  const helloWorld = () => {
+    console.log("Hello world")
+  }    
   return(
     <Router>
     <div>
       <Auth>
         <Routes>
-          <Route path="/"  />
-          <Route path="/ADMIN" element={<ControlPanelAdmin />} />
+          <Route path="/login" element={<Login />}  />
+          <Route path="/ADMIN" element={<ControlPanelAdmin LogOut={helloWorld}/>} />
         </Routes>
       </Auth>
     </div>

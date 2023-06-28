@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './screens/Login';
+import Header from './componente/Header';
 
-export default function Auth({ children }, value){
+
+export default function Auth({ children }){
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   let route = ""
@@ -14,9 +16,6 @@ export default function Auth({ children }, value){
     navigate(route);
   };
 
-  if(value == true){
-    logout
-  }
   const logout = () => {
     setIsLoggedIn(false);
     navigate('/login');
@@ -43,6 +42,7 @@ export default function Auth({ children }, value){
       ) : (
         <Login redirect={login} />
       )}
+
     </div>
   );
 };

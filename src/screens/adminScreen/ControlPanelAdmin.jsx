@@ -8,12 +8,12 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 import Auth from "../../Auth";
 
 
-export default function ControlPanelAdmin() {
+export default function ControlPanelAdmin(prop) {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
 
   const handleLogout = () => {
-    
+    prop.LogOut
   };
 
 
@@ -32,7 +32,7 @@ export default function ControlPanelAdmin() {
 
   return (
     <div>
-      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={<Auth logout={handleLogout}/>}/>
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
       <div className="body">
         <div className="containerBase" style={{ width: "80vw" }}>
           <div className="containerBase2">
