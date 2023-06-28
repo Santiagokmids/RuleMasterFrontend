@@ -5,10 +5,17 @@ import "./css/ControlPanel.css";
 import ButtonIcon from "../../componente/ButtonIcon";
 import IconTextInput from "../../componente/IconTextInput";
 import PopUpDropdown from "../../componente/PopUpDropdown";
+import { logout } from "../../Auth";
 
 
 export default function ControlPanelAdmin() {
   const [isPopupOpen, setPopupOpen] = useState(false);
+
+
+  const handleLogout = () => {
+    logout();
+  };
+
 
   const handleClick = () => {
     console.log("Botón clickeado");
@@ -25,7 +32,7 @@ export default function ControlPanelAdmin() {
 
   return (
     <div>
-      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleClick}/>
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
       <div className="body">
         <div className="containerBase" style={{ width: "80vw" }}>
           <div className="containerBase2">
