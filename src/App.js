@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
-import IconTextInput from './componente/IconTextInput';
-import ButtonIcon from './componente/ButtonIcon'
+
 import ControlePanelRecordManagement from './screens/recordManagementScreen/ControlePanelRecordManagement';
-import AddRule from './screens/recordManagementScreen/AddRule';
+import AddRule from './screens/recordManagementScreen/AddRecord';
 import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
 import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute'
 import PopUpDropdown from './componente/PopUpDropdown';
 import Login from './screens/Login';
 
 function App() {
+  
   let juan = 7;
   switch (juan) {
     case 1:

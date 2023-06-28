@@ -2,7 +2,9 @@
     background-color: #4786ff;
     justify-content: space-between;
     height: 12vh;
-
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .buttonContainer{
@@ -14,11 +16,14 @@
     color: #ffffff;
     text-align: left;
     font: 400 6vh 'Playfair Display', sans-serif;
-    position: absolute;
     padding-left: 4vw;
-    top: 2vh;
-    width: 50%;
+    top: 0.5vh;
+    width: 60%;
     float: left;
+    position: relative;
+    padding: 1vh 2vw;
+    margin-top: 0.1vh;
+    margin-bottom: 0.1vh;
 }
 
 .button {

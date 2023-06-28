@@ -22,11 +22,11 @@ function Createuser() {
       <body className="body">
         <div className="containerBase">
           <h1 className="mainTitle">Datos del usuario</h1>
-          <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw"/>
-          <FormInput type="text" placeholder="Apellido" h="5vh" w="34vw" />
+          <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw" fontsize="1.2rem"/>
+          <FormInput type="text" placeholder="Apellido" h="5vh" w="34vw" fontsize="1.2rem"/>
           <Dropdown selectOptions={selectOptions} h="6vh" w="35vw" t="4vh" optionD="Roles" fontsize="1.2rem"/>
-          <FormInput type="email" placeholder="Email"  h="5vh" w="34vw"/>
-          <FormInput type="password" placeholder="Contraseña"  h="5vh" w="34vw"/>
+          <FormInput type="email" placeholder="Email"  h="5vh" w="34vw" fontsize="1.2rem"/>
+          <FormInput type="password" placeholder="Contraseña"  h="5vh" w="34vw" fontsize="1.2rem"/>
           
           
           <div className="formComponent">

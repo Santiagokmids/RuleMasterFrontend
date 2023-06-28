@@ -40,5 +40,25 @@
     border-bottom: 0.5px black solid;
   
   }
+
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+  }
+  
+  .popup-content {
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+  }
   
   
