@@ -3,11 +3,18 @@ import "./css/AddRule.css"
 import Header from "../../componente/Header";
 import FormInput from "../../componente/FormInput";
 import Button from "../../componente/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function AddRecord() {
+  const navigation = useNavigate();
+  const returnBack = async (event) => {
+    event.preventDefault();
+    navigation("/recordManagement");
+  };
+
   return (
     <div >
-      <Header buttonText="Regresar" headerText="Crear un registro" />
+      <Header buttonText="Regresar" headerText="Crear un registro" onClick={returnBack} />
       <body className="body">
         <div className="containerBase">
           <h1 className="mainTitle">Datos del registro</h1>

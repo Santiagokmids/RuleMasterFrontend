@@ -2,6 +2,8 @@ import React from "react";
 import Dropdown from "../../componente/Dropdown";
 import Header from "../../componente/Header";
 import FormInput from "../../componente/FormInput";
+import { useNavigate } from "react-router-dom";
+
 
 
 import "./css/CreateUser.css";
@@ -16,9 +18,16 @@ function Createuser() {
     { label: "Evaluador de reglas", value: "Evaluador de reglas" },
     { label: "Gestor de ??????(Columns) Ingles VIII", value: "Gestor de ??????(Columns) Ingles VIII" },
   ];
+  const navigation = useNavigate();
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    navigation("/admin");
+  };
+
   return (
     <div >
-      <Header buttonText="Regresar" headerText="Crear un usuario" />
+      <Header buttonText="Regresar" headerText="Crear un usuario" onClick={handleLogout}/>
       <body className="body">
         <div className="containerBase">
           <h1 className="mainTitle">Datos del usuario</h1>

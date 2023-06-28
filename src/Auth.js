@@ -1,33 +1,31 @@
 import React, { useState } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import Login from './screens/Login';
 import Header from './componente/Header';
 
 
-export default function Auth({ children }){  
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+export default function Auth({ children }){
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   let route = ""
 
 
   const login = (user) => {
-    loginWithRedirect;
-    route = "/admin" // aqui obtendria el rol
+    setIsLoggedIn(true);
+    route = "/ADMIN" // aqui obtendria el rol
     navigate(route);
   };
 
-  const logOutC = () => {
-    logout
-    route = "/login"
-    navigate(route);
+  const logout = () => {
+    setIsLoggedIn(false);
+    navigate('/login');
   };
-
 
   const renderContent = () => {
-    if (isAuthenticated) {
+    if (isLoggedIn) {
       return children;
     } else {
+    
 
     }
   };
@@ -38,8 +36,9 @@ export default function Auth({ children }){
       {/* Renderiza el contenido protegido */}
       {renderContent()}
 
-      {isAuthenticated ? (
-        <button onClick={logOutC}>Hola</button>
+      {/* Renderiza el componente de inicio de sesión */}
+      {isLoggedIn ? (
+        <div />
       ) : (
         <Login redirect={login} />
       )}
@@ -47,3 +46,4 @@ export default function Auth({ children }){
     </div>
   );
 };
+

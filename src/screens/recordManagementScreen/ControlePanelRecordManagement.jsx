@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Header from "../../componente/Header";
+import { useNavigate } from "react-router-dom";
 
 import "./css/ControlPanelRecord.css";
 import ButtonIcon from "../../componente/ButtonIcon";
@@ -8,10 +9,18 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 
 export default function ControlePanelRecordManagement() {
   const [isPopupOpen, setPopupOpen] = useState(false);
-
+  const navigation = useNavigate();
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    navigation("/login");
+  };
   const handleClick = () => {
     console.log("Botón clickeado");
     setPopupOpen(true);
+  };
+  const createRecord = () => {
+    console.log("Botón clickeado");
+    navigation("/createRecord");
   };
 
   const handleClose = () => {
@@ -23,11 +32,11 @@ export default function ControlePanelRecordManagement() {
     ];
   return (
     <div >
-    <Header buttonText="Cerrar sesion" headerText="Panel de control" />
+    <Header buttonText="Cerrar sesion" headerText="Panel de control" onClick={handleLogout}/>
     <body className="body">
       <div className="containerBase" style={{width:"80vw"}}>
           <div className="containerBase2">
-            <ButtonIcon onClick={handleClick} marginL="1vw" marginT="1vw" text = "Crear registro"  w="24vw" h="6vh" img="reader-outline"/>
+            <ButtonIcon onClick={handleClick} marginL="1vw" marginT="1vw" text = "Crear registro"  w="24vw" h="6vh" img="reader-outline" onClick={createRecord}/>
             <ButtonIcon onClick={handleClick} marginL="1vw" marginT="1vw" text = "Gestionar registro"  w="24vw" h="6vh" img="settings-outline"/>
             <Button text = "Evaluar registro"  w="24vw" h="6vh" marginL="1vw" marginT="1vw"/>
           </div>

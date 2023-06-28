@@ -1,33 +1,37 @@
 import React from 'react';
 import './App.css';
-import Login from './screens/Login';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Auth from './Auth';
-import Createuser from './screens/adminScreen/CreateUser';
+import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
-import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ControlePanelRecordManagement from './screens/recordManagementScreen/ControlePanelRecordManagement';
-import ControlPanelRuleManagement from './screens/attributeManagementScreen/ControlPanelAttribute';
+import AddRule from './screens/recordManagementScreen/AddRecord';
+import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPanelRuleManagement';
+import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute'
+import PopUpDropdown from './componente/PopUpDropdown';
+import Login from './screens/Login';
+import AddRecord from './screens/recordManagementScreen/AddRecord';
+
+
 
 function App() {
-
+  const helloWorld = () => {
+    console.log("Hello world")
+  }
   return (
-    <Router>
-      <div>
-        <Auth>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<ControlPanelAdmin />} />
-            <Route path="/createUser" element={<Createuser />} />
-            <Route path="/attributeManagment" element={<ControlPanelAttribute />} />
-          </Routes>
-        </Auth>
+    <BrowserRouter>
+      <Routes>
 
-      </div>
-    </Router>
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<ControlPanelAdmin />} />
+        <Route path="/createUser" element={<CreateUser />} />
+        <Route path="/attributeManagement" element={<ControlPanelAttribute />} />
+        <Route path="/recordManagement" element={<ControlePanelRecordManagement />} />
+        <Route path="/createRecord" element={<AddRecord />} />
+        <Route path='/ruleManagement' element={<ControlPanelRuleManagement />} />
+      </Routes>
+    </BrowserRouter>
   )
-
 
 }
 
