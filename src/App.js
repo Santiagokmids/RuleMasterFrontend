@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Auth, { logout } from './Auth';
+import Auth from './Auth';
 import CreateUser from './screens/adminScreen/CreateUser';
 import ControlPanelAdmin from './screens/adminScreen/ControlPanelAdmin';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
@@ -18,7 +18,7 @@ function App() {
     <div>
       <Auth>
         <Routes>
-          <Route path="/" />
+          <Route path="/"  />
           <Route path="/ADMIN" element={<ControlPanelAdmin />} />
         </Routes>
       </Auth>

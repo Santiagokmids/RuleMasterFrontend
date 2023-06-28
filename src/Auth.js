@@ -1,39 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-let isLoggedInGlobal = false; // Variable global
-const navigate = useNavigate(); // Mueve la declaración aquí para que sea accesible en todo el componente
+import Login from './screens/Login';
 
-export function logout() {
-  isLoggedInGlobal = false;
-  navigate('/login');
-}
+export default function Auth({ children }, value){
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  let route = ""
 
-export function Auth({ children }){
-  let route = '';
-  const login = () => {
-    isLoggedInGlobal = true;
-    route = '/ADMIN'; // Simulación de rol
+
+  const login = (user) => {
+    setIsLoggedIn(true);
+    route = "/ADMIN" // aqui obtendria el rol
     navigate(route);
   };
 
+  if(value == true){
+    logout
+  }
+  const logout = () => {
+    setIsLoggedIn(false);
+    navigate('/login');
+  };
+
   const renderContent = () => {
-    if (isLoggedInGlobal) {
+    if (isLoggedIn) {
       return children;
     } else {
-      return <p>Debes iniciar sesión para acceder a esta página.</p>;
+    
+
     }
   };
 
+
   return (
     <div>
+      {/* Renderiza el contenido protegido */}
       {renderContent()}
-      {isLoggedInGlobal ? (
-        <button onClick={logout}>Cerrar sesión</button>
+
+      {/* Renderiza el componente de inicio de sesión */}
+      {isLoggedIn ? (
+        <div />
       ) : (
-        <button onClick={login}>Iniciar sesión</button>
+        <Login redirect={login} />
       )}
     </div>
   );
 };
-
-export default Auth;

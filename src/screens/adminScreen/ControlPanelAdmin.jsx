@@ -5,7 +5,7 @@ import "./css/ControlPanel.css";
 import ButtonIcon from "../../componente/ButtonIcon";
 import IconTextInput from "../../componente/IconTextInput";
 import PopUpDropdown from "../../componente/PopUpDropdown";
-import { logout } from "../../Auth";
+import Auth from "../../Auth";
 
 
 export default function ControlPanelAdmin() {
@@ -13,7 +13,7 @@ export default function ControlPanelAdmin() {
 
 
   const handleLogout = () => {
-    logout();
+    
   };
 
 
@@ -32,7 +32,7 @@ export default function ControlPanelAdmin() {
 
   return (
     <div>
-      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={<Auth logout={handleLogout}/>}/>
       <div className="body">
         <div className="containerBase" style={{ width: "80vw" }}>
           <div className="containerBase2">
