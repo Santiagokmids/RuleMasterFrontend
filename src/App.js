@@ -19,7 +19,7 @@ function App() {
       <Auth>
         <Routes>
           <Route path="/" />
-          <Route path="/ADMIN" element={<ControlPanelAdmin logout={logout} />} />
+          <Route path="/ADMIN" element={<ControlPanelAdmin />} />
         </Routes>
       </Auth>
     </div>
