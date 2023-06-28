@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import Header from "../../componente/Header";
+import { useLocation } from 'react-router-dom';
 
 import "./css/ControlPanel.css";
 import ButtonIcon from "../../componente/ButtonIcon";
 import IconTextInput from "../../componente/IconTextInput";
 import PopUpDropdown from "../../componente/PopUpDropdown";
-import Auth from "../../Auth";
 
-
-export default function ControlPanelAdmin(prop) {
+export default function ControlPanelAdmin({ callback }) {
   const [isPopupOpen, setPopupOpen] = useState(false);
-
-
-  const handleLogout = () => {
-    prop.LogOut
-  };
-
+  const location = useLocation();
 
   const handleClick = () => {
     console.log("Botón clickeado");
@@ -28,7 +22,13 @@ export default function ControlPanelAdmin(prop) {
 
   const selectOptions = [
     { label: "Eliminar usuario", value: "Eliminar usuario" },
-    ];
+  ];
+
+  const handleLogout = () => {
+    if (callback && typeof callback === 'function') {
+      callback();
+    }
+  };
 
   return (
     <div>
@@ -43,7 +43,7 @@ export default function ControlPanelAdmin(prop) {
         </div>
       </div>
       {isPopupOpen && (
-            <PopUpDropdown button2="Seleccionar accion" button1="Ingrese el ID" textHeader="Gestionar usuarios" selectOptions={selectOptions} onClickHeader={handleClose} />
+        <PopUpDropdown button2="Seleccionar accion" button1="Ingrese el ID" textHeader="Gestionar usuarios" selectOptions={selectOptions} onClickHeader={handleClose} />
       )}
     </div>
   );

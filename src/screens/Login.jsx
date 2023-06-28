@@ -1,16 +1,10 @@
 import React from "react";
-import LogoutButton from "../componente/LogoutButton";
 import "./Login.css";
-import { useAuth0 } from "@auth0/auth0-react";
 import img from "../img/loginCoffee.jpg";
 import Button from "../componente/Button";
 
 function Login(prop) {
-  const { user, isAuthenticated } = useAuth0();
-  const { loginWithRedirect } = useAuth0();
 
-  
-  console.log(JSON.stringify(user));
   return (
     <div className="loginWrapper">
       <div className="loginContainer">
@@ -19,11 +13,7 @@ function Login(prop) {
             <h1 className="loginText">¡Bienvenido!</h1>
             <h2 className="loginText">Inicia sesión para continuar</h2>
           </div>
-          <div className="logButton">
-            {isAuthenticated ? prop.redirect(user) : (
-              <Button w="20vw" h="6vh" text="Login" marginT="5vh" marginL="0vw" fontsize="1.5rem" onClick={loginWithRedirect} />
-            )}
-          </div>
+              <Button w="20vw" h="6vh" text="Login" marginT="5vh" marginL="0vw" fontsize="1.5rem" onClick={prop.redirect} />
         </div>
         <img className="coffeImg" src={img} alt="" />
       </div>
