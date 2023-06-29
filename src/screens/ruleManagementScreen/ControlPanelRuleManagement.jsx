@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../componente/Header";
-import dataBaseExample from "../../img/dataBaseExample.jpeg";
 import "./css/CalculatorScreen.css";
 import Button from "../../componente/Button";
 import ButtonType1 from "../../componente/ButtonType1";
@@ -16,6 +15,10 @@ export default function ControlPanelRuleManagement() {
 
   const [tableData, setTableData] = useState([]);
   const [rules, setRules] = useState([]);
+
+
+  const regexRulePattern= /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s){0,3}$/i;
+
 
   const baseUrl="http://localhost:8091";
 
@@ -114,6 +117,18 @@ export default function ControlPanelRuleManagement() {
 
   }, []);
 
+  
+  const saveRule = async () => {
+   console.log(ruleValue)
+    const valid=regexRulePattern.test(ruleValue);
+    if(valid){
+      alert("Nice")
+    }else{
+      alert("No :c")
+    }
+
+  };
+
   return (
     <div>
         <Header buttonText="Cerrar sesión" headerText="Panel de control" />
@@ -123,10 +138,16 @@ export default function ControlPanelRuleManagement() {
             <table className="">
               <thead>
                 <tr>
+                  <th  key="id" className="">ID</th>
                   {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                    <th  key={index} className="">
-                      {columnName} - {tableData.columnTypes[index]}
+                   columnName !== "record_id" && <th  key={index} className="">
+                      {columnName} - 
+                      {tableData.columnTypes[index] === "numeric" ? " numerica" : 
+                       tableData.columnTypes[index] === "varchar"  ? " texto": 
+                        tableData.columnTypes[index] === "boolean"  ? " bool": 
+                       tableData.columnTypes[index]}
                     </th>
+                    
                   ))}
                 </tr>
               </thead>
@@ -166,9 +187,9 @@ export default function ControlPanelRuleManagement() {
 
         <div>
             <div className="resultContainer">
-                    <input type="text" className="result" placeholder="Regla" value={ruleValue}disabled/>
+                    <input type="text" className="result" placeholder="Regla" value={ruleValue} disabled/>
                     <button className="result" style={{width: "4vw", marginLeft: "0.5vw"}} onClick={handleClickCleanAll}><ion-icon name="arrow-back-outline"></ion-icon></button>
-                    <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw"/>
+                    <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw" onClick={saveRule}/>
                     {/* <Button text="Gestionar regla" w="12vw" h="6vh" marginL="0.6vw" />*/}
             </div>
 
