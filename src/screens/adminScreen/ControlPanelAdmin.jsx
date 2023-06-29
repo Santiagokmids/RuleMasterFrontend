@@ -34,6 +34,10 @@ function ControlPanelAdmin() {
     navigation("/login");
   };
 
+  const handleCreateUser = async (event) => {
+    event.preventDefault();
+    navigation("/createUser");
+  };
 
   const handleClick = () => {
     console.log("Botón clickeado");
@@ -60,7 +64,7 @@ function ControlPanelAdmin() {
           <div className="containerBase2">
             <IconTextInput marginT="1.5vw" w="24vw" h="6vh" type="text" placeholder="Buscar Usuario" icon="search-outline" />
             <ButtonIcon onClick={handleClick} marginT="1.5vw" marginL="1vw" text="Gestionar Usuario" w="24vw" h="6vh" img="person-outline" />
-            <ButtonIcon onClick={handleClick} marginT="1.5vw" marginL="1vw" text="Crear usuario" w="24vw" h="6vh" img="person-add-outline" />
+            <ButtonIcon onClick={handleCreateUser} marginT="1.5vw" marginL="1vw" text="Crear usuario" w="24vw" h="6vh" img="person-add-outline" />
           </div>
 
           <br />

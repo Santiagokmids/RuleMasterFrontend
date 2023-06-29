@@ -21,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />}  />
         <Route path="/ADMIN" element={<ControlPanelAdmin />} />
+        <Route path="/createUser" element={<CreateUser />} />
       </Routes>
     </BrowserRouter>
   )
