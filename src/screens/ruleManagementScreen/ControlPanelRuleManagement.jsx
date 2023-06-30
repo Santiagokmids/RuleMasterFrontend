@@ -409,7 +409,7 @@ export default function ControlPanelRuleManagement() {
                   >
                       <option value="">Columna</option>
                       {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                           columnName !== "record_id"  &&  <option key={index}>{columnName}</option>
+                           columnName !== "record_id" && tableData.columnTypes[index]===selectedColumnType &&  <option key={index}>{columnName}</option>
                     ))}
                   </select>
                   
