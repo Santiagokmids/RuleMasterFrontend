@@ -9,6 +9,7 @@ import axios from "axios";
 export default function ControlPanelRuleManagement() {
 
   const [ruleValue, setRuleValue] = useState('');
+  const [ruleName, setRuleName] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
   const [selectedColumnType, setSelectedColumnType] = useState('');
   const [selectedColumn2, setSelectedColumn2] = useState('');
@@ -223,9 +224,12 @@ export default function ControlPanelRuleManagement() {
 
   const handleInputValueChange = (event) => {
     setInputValue(event.target.value);
-
-   
+  
   };
+  const handleRuleNameChange = (event) => {
+    setRuleName(event.target.value);
+  };
+
 
   const handleClickInputValue = () => {
     var inputValueRule= inputValue.replace(/'/g,"");
@@ -310,9 +314,28 @@ export default function ControlPanelRuleManagement() {
    console.log(ruleValue)
     const valid=regexRulePattern.test(ruleValue);
     if(valid){
-      alert("Nice")
+      try{
+        const response = await axios.post(
+          baseUrl+"/rules",
+          {
+            ruleName:ruleName,
+            ruleDefinition:ruleValue
+          },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType":"application/json"
+            },
+          }
+        );
+        alert("La regla se ha agregado correctamente")
+        window.location.reload();
+      }catch (error) {
+        alert("La regla no se pudo agregar "+error.response.data.details[0].errorMessage)
+      }
+      
     }else{
-      alert("No :c")
+      alert("Solo se permiten maximo 4 expresiones dentro de un parentesis, y maximo 4 parentesis")
     }
 
   };
@@ -350,11 +373,13 @@ export default function ControlPanelRuleManagement() {
             ))}
               </tbody>
           </table>
+            
         </div>
 
 
         <div>
           <h3>Reglas</h3>
+          {rules.length>0? (
           <table className="">
             <thead>
                 <tr>
@@ -371,10 +396,16 @@ export default function ControlPanelRuleManagement() {
               ))}
             </tbody>
           </table>
+          ): (
+            <div className="">
+              <p className="">No hay reglas agregadas</p>
+            </div>
+          )}
         </div>
 
         <div>
             <div className="resultContainer">
+                    <input type="text" className="" placeholder="Nombre regla" value={ruleName} onChange={handleRuleNameChange}/>
                     <input type="text" className="result" placeholder="Regla" value={ruleValue} disabled/>
                     <button className="result" style={{width: "4vw", marginLeft: "0.5vw"}} onClick={handleClickCleanAll}><ion-icon name="arrow-back-outline"></ion-icon></button>
                     <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw" onClick={saveRule}/>
