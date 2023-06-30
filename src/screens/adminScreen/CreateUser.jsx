@@ -34,34 +34,41 @@ function Createuser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try{
-      const response = await axios.post(baseUrl + "/users",
-        {
-          name,
-          lastName,
-          email,
-          password,
-          role
-        },
-        {
-          headers:{
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType" : "application/json",
+    if(role !== ""){
+
+      try{
+        const response = await axios.post(baseUrl + "/users",
+          {
+            name,
+            lastName,
+            email,
+            password,
+            role
+          },
+          {
+            headers:{
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType" : "application/json",
+            }
           }
+        );
+  
+        if (response.status === 200) {
+          alert("El usuario fue creado con éxito!");
+          navigation("/login");
+  
         }
-      );
-
-      if (response.status === 200) {
-        alert("El usuario fue creado con éxito!");
-        navigation("/login");
-
       }
+      catch (error) {
+        console.log(error)
+        alert("No se pudo crear el usuario. "+error.response.data.details[0].errorMessage)
+      } 
+    }else{
+      alert("No se pudo crear el usuario. Por favor seleccione un rol");
     }
-    catch (error) {
-      console.log(error)
-      alert("No se pudo crear el usuario. "+error.response.data.details[0].errorMessage)
-    } 
   }
+  
+  
 
   const handleClick = async (event) => {
     event.preventDefault();
