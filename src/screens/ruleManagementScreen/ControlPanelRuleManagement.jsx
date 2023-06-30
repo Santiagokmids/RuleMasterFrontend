@@ -18,7 +18,8 @@ export default function ControlPanelRuleManagement() {
   const [rules, setRules] = useState([]);
 
 
-  const regexRulePattern= /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s){0,3}$/i;
+  const regexRulePattern= /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s){0,3}$/i;
+  const regexNumber = /^\d+(\.\d+)?$/;
 
   const [openingBracket, setOpeningBracket] = useState(true);
   const [finalBracket, setFinalBracket] = useState(false);
@@ -227,17 +228,31 @@ export default function ControlPanelRuleManagement() {
   };
 
   const handleClickInputValue = () => {
-    setRuleValue(prevValue => prevValue + inputValue+' ');
+    var inputValueRule= inputValue.replace(/'/g,"");
+    var valid=true;
+    if(selectedColumnType==="varchar"){
+      inputValueRule="'"+inputValueRule+"'";
+    }
+    if(selectedColumnType==="numeric" && !regexNumber.test(inputValueRule)){
+      valid=false;
+      alert("La columna se debe comparar con un numero");
+    }
 
-    setOpColumn2(false);
-    setButtonTrue(false);
-    setButtonFalse(false);
-    setInputEnable(false);
-    setButtonAnd(true);
-    setButtonOr(true);
-    setFinalBracket(true);
+    if(valid){
+      setRuleValue(prevValue => prevValue + inputValueRule+' ');
 
-    setInputValue("");
+      setOpColumn2(false);
+      setButtonTrue(false);
+      setButtonFalse(false);
+      setInputEnable(false);
+      setButtonAnd(true);
+      setButtonOr(true);
+      setFinalBracket(true);
+  
+      setInputValue("");
+    }
+
+    
   };
 
   const handleClickCleanAll = () => {
