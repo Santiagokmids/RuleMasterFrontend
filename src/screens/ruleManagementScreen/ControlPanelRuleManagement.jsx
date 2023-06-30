@@ -10,6 +10,7 @@ export default function ControlPanelRuleManagement() {
 
   const [ruleValue, setRuleValue] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [selectedColumnType, setSelectedColumnType] = useState('');
   const [selectedColumn2, setSelectedColumn2] = useState('');
   const [inputValue, setInputValue] = useState('');
 
@@ -19,74 +20,246 @@ export default function ControlPanelRuleManagement() {
 
   const regexRulePattern= /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9]+\s){0,3}\)\s){0,3}$/i;
 
+  const [openingBracket, setOpeningBracket] = useState(true);
+  const [finalBracket, setFinalBracket] = useState(false);
+  const [greaterThan, setGreaterThan] = useState(false)
+  const [lessThan, setLessThan] = useState(false)
+  const [equalTo, setEqualTo] = useState(false)
+  const [differentFrom, setDifferentFrom] = useState(false)
+  const [buttonAnd, setButtonAnd] = useState(false)
+  const [buttonOr, setButtonOr] = useState(false)
+  const [buttonTrue, setButtonTrue] = useState(false)
+  const [buttonFalse, setButtonFalse] = useState(false)
+  const [opColumn1, setOpColumn1] = useState(false)
+  const [opColumn2, setOpColumn2] = useState(false)
+  const [inputEnable, setInputEnable] = useState(false)
 
   const baseUrl="http://localhost:8091";
 
   function handleColumnChange(event) {
-    const selectedOption = event.target.value;
-    setSelectedColumn(selectedOption);
-    setRuleValue(prevValue => prevValue + selectedOption+' ');
+    const { value, selectedIndex } = event.target;
+    setSelectedColumn(value);
+    setRuleValue(prevValue => prevValue + value+' ');
+
+    setOpColumn1(false);
+
+    if(tableData.columnTypes[selectedIndex] === "numeric"){
+      setSelectedColumnType("numeric");
+      setGreaterThan(true);
+      setLessThan(true);
+      setEqualTo(true);
+    }
+
+    if(tableData.columnTypes[selectedIndex] === "varchar" ){
+      setSelectedColumnType("varchar");
+      setEqualTo(true);
+      setDifferentFrom(true);
+    }
+
+    if(tableData.columnTypes[selectedIndex] === "boolean"){
+      setSelectedColumnType("boolean");
+      setEqualTo(true);
+      setDifferentFrom(true);
+    }
+
+    setSelectedColumn('');
+
   }
 
   function handleColumn2Change(event) {
     const selectedOption = event.target.value;
     setSelectedColumn2(selectedOption);
     setRuleValue(prevValue => prevValue + selectedOption+' ');
+
+    setOpColumn2(false);
+    setButtonTrue(false);
+    setButtonFalse(false);
+    setInputEnable(false);
+    setButtonAnd(true);
+    setButtonOr(true);
+    setFinalBracket(true);
+
+    setSelectedColumn2('');
   }
 
 
   const handleClickOpeningBracket = () => {
     setRuleValue(prevValue => prevValue + '( ');
+    setOpColumn1(true);
+    setOpeningBracket(false);
   };
 
 
   const handleClickFinalBracket = () => {
     setRuleValue(prevValue => prevValue + ') ');
+
+   
+    setFinalBracket(false);
+    setButtonAnd(true);
+    setButtonOr(true);
+
   };
 
   const handleClickGreaterThan = () => {
     setRuleValue(prevValue => prevValue + 'MAYOR QUE ');
+
+    
+      setGreaterThan(false);
+      setEqualTo(false);
+      setGreaterThan(false);
+      setLessThan(false);
+      setDifferentFrom(false);
+
+      setOpColumn2(true);
+      setInputEnable(true);
+         
   };
 
   const handleClickLessThan = () => {
     setRuleValue(prevValue => prevValue + 'MENOR QUE ');
+
+    setLessThan(false);
+    setEqualTo(false);
+    setGreaterThan(false);
+    setLessThan(false);
+    setDifferentFrom(false);
+
+    setOpColumn2(true);
+    setInputEnable(true);
   };
 
   const handleClickEqualTo = () => {
     setRuleValue(prevValue => prevValue + 'IGUAL A ');
+    setEqualTo(false);
+    setGreaterThan(false);
+    setLessThan(false);
+    setDifferentFrom(false);
+
+    if(selectedColumnType === "numeric" || selectedColumnType === "varchar"){
+      setOpColumn2(true);
+      setInputEnable(true);
+    }
+
+    if(selectedColumnType === "boolean"){
+      setOpColumn2(true);
+      setButtonTrue(true);
+      setButtonFalse(true);
+    }
   };
 
   const handleClickDifferentFrom = () => {
     setRuleValue(prevValue => prevValue + 'DIFERENTE A ');
+
+    setEqualTo(false);
+    setGreaterThan(false);
+    setLessThan(false);
+    setDifferentFrom(false);
+
+    if(selectedColumnType === "varchar"){
+      setOpColumn2(true);
+      setInputEnable(true);
+    }
+
+    if(selectedColumnType === "boolean"){
+      setOpColumn2(true);
+      setButtonTrue(true);
+      setButtonFalse(true);
+    }
   };
 
   const handleClickTrue = () => {
     setRuleValue(prevValue => prevValue + 'VERDADERO ');
+
+    setOpColumn2(false);
+    setButtonTrue(false);
+    setButtonFalse(false);
+    setInputEnable(false);
+    setButtonAnd(true);
+    setButtonOr(true);
+    setFinalBracket(true);
   };
 
   const handleClickFalse = () => {
     setRuleValue(prevValue => prevValue + 'FALSO ');
+
+    setOpColumn2(false);
+    setButtonTrue(false);
+    setButtonFalse(false);
+    setInputEnable(false);
+    setButtonAnd(true);
+    setButtonOr(true);
+    setFinalBracket(true);
   };
 
   const handleClickAnd = () => {
     setRuleValue(prevValue => prevValue + 'Y ');
+
+    if(!finalBracket){
+      setOpeningBracket(true);
+    }else{
+      setOpColumn1(true);
+    }
+    setButtonAnd(false);
+    setButtonOr(false);
+    setFinalBracket(false);
+    
   };
 
   const handleClickOr = () => {
     setRuleValue(prevValue => prevValue + 'O ');
+
+    if(!finalBracket){
+      setOpeningBracket(true);
+    }else{
+      setOpColumn1(true);
+    }
+
+    setButtonAnd(false);
+    setButtonOr(false);
+    setFinalBracket(false);
+
   };
 
   const handleInputValueChange = (event) => {
     setInputValue(event.target.value);
+
+   
   };
 
   const handleClickInputValue = () => {
     setRuleValue(prevValue => prevValue + inputValue+' ');
+
+    setOpColumn2(false);
+    setButtonTrue(false);
+    setButtonFalse(false);
+    setInputEnable(false);
+    setButtonAnd(true);
+    setButtonOr(true);
+    setFinalBracket(true);
+
+    setInputValue("");
   };
 
   const handleClickCleanAll = () => {
     setRuleValue('');
+
+    setOpeningBracket(true);
+    setOpColumn1(false);
+    setOpColumn2(false);
+    setButtonTrue(false);
+    setButtonFalse(false);
+    setInputEnable(false);
+    setButtonAnd(false);
+    setButtonOr(false);
+    setFinalBracket(false);
+    setGreaterThan(false);
+    setLessThan(false);
+    setEqualTo(false);
+    setDifferentFrom(false);
+
   };
+
+
 
   useEffect(()=>{
     const fetchTable = async () => {
@@ -200,6 +373,7 @@ export default function ControlPanelRuleManagement() {
                   name="columns"
                   value={selectedColumn} 
                   onChange={handleColumnChange}
+                  disabled={!opColumn1}
                 >
                     <option value="">Columna</option>
                     {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
@@ -208,16 +382,16 @@ export default function ControlPanelRuleManagement() {
                    
                     
                 </select>
-                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>(</div>} onClick={handleClickOpeningBracket} w="10vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>)</div>} onClick={handleClickFinalBracket} w="10vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>(</div>} onClick={handleClickOpeningBracket} disabled={!openingBracket} w="10vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>)</div>} onClick={handleClickFinalBracket} disabled={!finalBracket} w="10vw" h="15vh" />
 
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Mayor que" onClick={handleClickGreaterThan} w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Menor que" onClick={handleClickLessThan}w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Igual a" onClick={handleClickEqualTo} w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Diferente a" onClick={handleClickDifferentFrom} w="8vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="Mayor que" onClick={handleClickGreaterThan} disabled={!greaterThan} w="8vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="Menor que" onClick={handleClickLessThan} disabled={!lessThan} w="8vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="Igual a" onClick={handleClickEqualTo} disabled={!equalTo} w="8vw" h="15vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="Diferente a" onClick={handleClickDifferentFrom} disabled={!differentFrom} w="8vw" h="15vh" />
                 <div className="logicalContainer">
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Verdadero" onClick={handleClickTrue} w="8vw" h="6vh" />
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Falso" onClick={handleClickFalse} w="8vw" h="6vh" />
+                  <ButtonType1 marginL="2vw" marginT="2vh" text="Verdadero" onClick={handleClickTrue} disabled={!buttonTrue} w="8vw" h="6vh" />
+                  <ButtonType1 marginL="2vw" marginT="2vh" text="Falso" onClick={handleClickFalse} disabled={!buttonFalse} w="8vw" h="6vh" />
 
                 </div>
 
@@ -231,6 +405,7 @@ export default function ControlPanelRuleManagement() {
                     
                     value={selectedColumn2} 
                     onChange={handleColumn2Change}
+                    disabled={!opColumn2}
                   >
                       <option value="">Columna</option>
                       {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
@@ -238,12 +413,12 @@ export default function ControlPanelRuleManagement() {
                     ))}
                   </select>
                   
-                  <input type="text" className="" placeholder="Valor" value={inputValue}  onChange={handleInputValueChange}/>
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Valor" onClick={handleClickInputValue} w="10vw" h="6vh" />
+                  <input type="text" className="" placeholder="Valor" value={inputValue}  onChange={handleInputValueChange} disabled={!inputEnable}/>
+                  <ButtonType1 marginL="2vw" marginT="2vh" text="Valor" onClick={handleClickInputValue} disabled={!inputEnable} w="10vw" h="6vh" />
                 </div>
                 <div className="logicalContainer">
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Y" onClick={handleClickAnd} w="10vw" h="6vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="O" onClick={handleClickOr} w="10vw" h="6vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="Y" onClick={handleClickAnd} disabled={!buttonAnd} w="10vw" h="6vh" />
+                <ButtonType1 marginL="2vw" marginT="2vh" text="O" onClick={handleClickOr} disabled={!buttonOr} w="10vw" h="6vh" />
                 </div>
             </div>
         </div>
