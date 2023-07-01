@@ -11,7 +11,7 @@ import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPa
 import PopUpDropdown from './componente/PopUpDropdown';
 
 function App() {
-  let juan = 5;
+  let juan = 1;
   switch (juan) {
     case 1:
       return (
