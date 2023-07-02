@@ -5,12 +5,12 @@ import "./css/DropDown.css";
 
 function Dropdown(props) {
   const [dropValue, setDropValue] = React.useState();
-  const { w, h, t, selectOptions, optionD, fontsize} = props;
+  const { w, h, t, selectOptions, optionD, fontsize, onChange} = props;
 
   const handleSelect = (event) => {
-    setDropValue(event.value);
-    console.log("value", event.value);
-    console.log("dropValue", dropValue);
+    const selectedValue = event.value;
+    setDropValue(selectedValue);
+    onChange(selectedValue);
   };
 
   const customStyles = {

@@ -1,7 +1,7 @@
 
 .containerBase {
-  height: 80vh;
-  width: 50vw;
+  height: 75vh;
+  width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,7 @@
 }
 
 .mainTitle {
-  margin-top: 10vh;
+  margin-top: 7vh;
   width: 34vw;
   height: auto;
   background: rgba(217, 217, 217, 0);
