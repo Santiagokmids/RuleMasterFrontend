@@ -7,17 +7,17 @@ ion-icon {
 .IconTextInputWrapper {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
   border-radius: 10px;
   background: #d9d9d9;
-
+  padding-left: 1%;
   flex-shrink: 0;
 }
 
 .IconTextInputContainer{
     border-left: 1px solid black;
-    width: 100%;
-
+    width: 85%;
+    padding-left: 2%;
+    margin-left: 2%;
 }
 
 .IconTextInput {
@@ -28,7 +28,6 @@ ion-icon {
   color: black;
   font-size: 1.2em;
   font-weight: 800;
-  padding-left: 0.5vw;
   width: 100%;
 
 }

@@ -1,64 +1,56 @@
 import React from "react";
 import Select from "react-select";
-
-
-
-
+import "./css/DropDown.css";
 
 
 function Dropdown(props) {
   const [dropValue, setDropValue] = React.useState();
-  const { w, h, t} = props;
+  const { w, h, t, selectOptions, optionD, fontsize} = props;
 
   const handleSelect = (event) => {
     setDropValue(event.value);
     console.log("value", event.value);
     console.log("dropValue", dropValue);
-
   };
 
   const customStyles = {
-
     control: (provided) => ({
       ...provided,
-      border: "1px solid #666",
       background: "#f2f2f2",
       boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-      borderRadius: "10px", // Ajusta el radio de borde deseado 
-      width: w,
-      height: h,
+      width: "100%",
+      height: "100%",
       fontFamily: "'Josefin Sans', sans-serif",
       textAlign: "left",
       color: "#6E6E6E",
-      fontSize: "1.2em",
+      fontSize: fontsize,
+      
       fontWeight: 800,
-
     }),
-    singleValue: (provided) => ({
+    option: (provided, state) => ({
       ...provided,
-      color: "blue", // Cambia "blue" al color que desees
-      fontSize: "16px", // Ajusta el tamaño de fuente deseado
-      fontFamily: "'Josefin Sans', sans-serif",
-      color: "#6E6E6E",
-      fontSize: "1.2em",
-      fontWeight: 800,
+      background: state.isFocused ? "#4786ffd1" : "white",
+      color: "black",
+      fontSize: fontsize
     }),
   };
 
-  React.useEffect(() => { }, [dropValue]);
+  React.useEffect(() => {}, [dropValue]);
 
   return (
-    <div className="DropdownContainer" style={{ width: w, height: h, marginTop: t}}>
-      <Select
-        defaultValue={{ label: "Rol", value: "" }}
-        options={props.selectOptions}
+    <div
+      className="DropdownContainer"
+      style={{ width: w, height: h, marginTop: t }}
+    >
+      <Select classNames={`select-text, css-1dimb5e-singleValue ${fontsize}`}
+        defaultValue={{ label: optionD, value: "" }}
+        options={selectOptions}
         onChange={handleSelect}
-        className="select-text"
         styles={customStyles}
-
       />
     </div>
   );
 }
 
 export default Dropdown;
+

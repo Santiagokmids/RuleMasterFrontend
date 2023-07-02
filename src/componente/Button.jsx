@@ -3,15 +3,10 @@ import "./css/Button.css";
 
 
 export default function Button(props) {
-    const { w, h, text, marginT, marginL,onClick} = props;
-    const handleClick = () => {
-        if (onClick) {
-          onClick();
-        }
-      };
+  const { w, h, text, marginT, marginL, fontsize, onClick} = props;    
     return (
-      <div>
-          <button style={{ width: w, height: h, marginTop: marginT, marginLeft: marginL}} onClick={handleClick} className="buttonStyle">{text} </button>
+      <div style={{ width: w, height: h, marginTop: marginT, marginLeft: marginL}} className='containerButton'>
+          <button onClick={onClick}  className="buttonStyle" style={{fontSize: fontsize}}>{text}</button>
       </div>
     )
 }
