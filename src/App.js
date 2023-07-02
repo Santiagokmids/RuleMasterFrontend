@@ -10,22 +10,28 @@ import ControlPanelRuleManagement from './screens/ruleManagementScreen/ControlPa
 import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPanelAttribute'
 import PopUpDropdown from './componente/PopUpDropdown';
 import Login from './screens/Login';
+import AddRecord from './screens/recordManagementScreen/AddRecord';
+
 
 
 function App() {
   const helloWorld = () => {
     console.log("Hello world")
-  }    
-  return(
+  }
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />}  />
-        <Route path="/ADMIN" element={<ControlPanelAdmin />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<ControlPanelAdmin />} />
         <Route path="/createUser" element={<CreateUser />} />
+        <Route path="/attributeManagement" element={<ControlPanelAttribute />} />
+        <Route path="/recordManagement" element={<ControlePanelRecordManagement />} />
+        <Route path="/createRecord" element={<AddRecord />} />
+        <Route path='/ruleManagement' element={<ControlPanelRuleManagement />} />
       </Routes>
     </BrowserRouter>
   )
-
 
 }
 
