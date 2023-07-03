@@ -153,7 +153,7 @@ async function getRules(){
 async function getRecords(){
 
   const records = await axios.get(
-    baseUrl+"/table/records",
+    baseUrl+"/table/table_data",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
