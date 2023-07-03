@@ -344,18 +344,18 @@ export default function ControlPanelRuleManagement() {
     <div>
         <Header buttonText="Cerrar sesión" headerText="Panel de control" />
       <div className="logicalContainer">
-        <div >
-            <h3>Datos</h3>
-            <table className="">
+      <h3>Datos</h3>
+        <div className="table-responsive">
+            <table className="table table-bordered border-dark" style={{tableLayout:"fixed"}}>
               <thead>
                 <tr>
-                  <th  key="id" className="">ID</th>
+                  <th  key="id" scope="col">ID</th>
                   {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
                    columnName !== "record_id" && <th  key={index} className="">
                       {columnName} - 
                       {tableData.columnTypes[index] === "numeric" ? " numerica" : 
                        tableData.columnTypes[index] === "varchar"  ? " texto": 
-                        tableData.columnTypes[index] === "boolean"  ? " bool": 
+                        tableData.columnTypes[index] === "bool"  ? " boolean": 
                        tableData.columnTypes[index]}
                     </th>
                     
@@ -376,15 +376,15 @@ export default function ControlPanelRuleManagement() {
             
         </div>
 
-
-        <div>
-          <h3>Reglas</h3>
+        <h3>Reglas</h3>
+        <div className="table-responsive">
+          
           {rules.length>0? (
-          <table className="">
+          <table className="table table-bordered border-dark" style={{tableLayout:"fixed"}}>
             <thead>
                 <tr>
-                <th >Nombre </th>
-                <th >Regla</th>
+                <th scope="col">Nombre </th>
+                <th scope="col" >Regla</th>
                 </tr>
             </thead>
             <tbody>
