@@ -12,6 +12,12 @@ export default function ControlPanelRuleManagement() {
     event.preventDefault();
     navigation("/login");
   };
+
+  const handleCreateColumn= async (event) => {
+    event.preventDefault();
+    navigation("/createColumn");
+  };
+
   return (
     <div >
     <Header buttonText="Cerrar sesion" headerText="Panel de control" onClick={handleLogout} />
@@ -19,7 +25,7 @@ export default function ControlPanelRuleManagement() {
       <div className="containerBase" style={{width:"80vw"}}>
           <div className="containerBase2">
             <ButtonIcon marginL="1vw" marginT="1vw" text = "Gestionar Columnas"  w="36vw" h="6vh" img="reader-outline"/>
-            <Button text = "Agregar Columnas"  w="36vw" h="6vh" marginL="1vw" marginT="1vw"/>
+            <Button onClick={handleCreateColumn} text = "Agregar Columnas"  w="36vw" h="6vh" marginL="1vw" marginT="1vw"/>
 
             
 

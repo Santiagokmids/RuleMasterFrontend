@@ -11,6 +11,7 @@ import ControlPanelAttribute from './screens/attributeManagementScreen/ControlPa
 import PopUpDropdown from './componente/PopUpDropdown';
 import Login from './screens/Login';
 import AddRecord from './screens/recordManagementScreen/AddRecord';
+import AddColumn from './screens/attributeManagementScreen/AddColumn';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/admin" element={<ControlPanelAdmin />} />
         <Route path="/createUser" element={<CreateUser />} />
         <Route path="/attributeManagement" element={<ControlPanelAttribute />} />
+        <Route path="/createColumn" element={<AddColumn />} />
         <Route path="/recordManagement" element={<ControlePanelRecordManagement />} />
         <Route path="/createRecord" element={<AddRecord />} />
         <Route path='/ruleManagement' element={<ControlPanelRuleManagement />} />
