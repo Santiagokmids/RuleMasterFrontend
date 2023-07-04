@@ -11,18 +11,20 @@ export default function ControlPanelRuleManagement() {
   const navigation = useNavigate();
   const [tableData, setTableData] = useState([]);
 
-  const baseUrl="http://localhost:8091";
+  const baseUrl = "http://localhost:8091";
 
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const fetchTable = async () => {
       const response = await axios.get(
-          baseUrl + "/table/table_data",
-          { headers: { 
-              "Access-Control-Allow-Origin":baseUrl,
-              "MediaType":"application/json"
-          } }
-          );
+        baseUrl + "/table/table_data",
+        {
+          headers: {
+            "Access-Control-Allow-Origin": baseUrl,
+            "MediaType": "application/json"
+          }
+        }
+      );
       const responseData = response.data;
       setTableData(responseData);
 
@@ -36,56 +38,67 @@ export default function ControlPanelRuleManagement() {
     navigation("/login");
   };
 
-  const handleCreateColumn= async (event) => {
+  const handleCreateColumn = async (event) => {
     event.preventDefault();
     navigation("/createColumn");
   };
 
   return (
     <div >
-    <Header buttonText="Cerrar sesion" headerText="Panel de control" onClick={handleLogout} />
-    <body className="body">
-      <div className="containerBase" style={{width:"80vw"}}>
+      <Header buttonText="Cerrar sesion" headerText="Panel de control" onClick={handleLogout} />
+      <body className="body">
+        <div className="containerBase" style={{ width: "80vw" }}>
           <div className="containerBase2">
-            <ButtonIcon marginL="1vw" marginT="1vw" text = "Gestionar Columnas"  w="36vw" h="6vh" img="reader-outline"/>
-            <Button onClick={handleCreateColumn} text = "Agregar Columnas"  w="36vw" h="6vh" marginL="1vw" marginT="1vw"/>
+            <ButtonIcon marginL="1vw" marginT="1vw" text="Gestionar Columnas" w="36vw" h="6vh" img="reader-outline" />
+            <Button onClick={handleCreateColumn} text="Agregar Columnas" w="36vw" h="6vh" marginL="1vw" marginT="1vw" />
           </div>
 
-          <div className="container">
-            <br />
-              <div className="table-responsive">
-                <table className="table table-bordered border-dark" style={{tableLayout:"fixed"}}>
-                  <thead>
-                    <tr>
-                      <th  key="id" scope="col">ID</th>
-                      {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                      columnName !== "record_id" && <th  key={index} className="">
-                          {columnName} - 
-                          {tableData.columnTypes[index] === "numeric" ? " numerica" : 
-                          tableData.columnTypes[index] === "varchar"  ? " texto": 
-                            tableData.columnTypes[index] === "bool"  ? " boolean": 
-                          tableData.columnTypes[index]}
-                        </th>
-                        
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {tableData.records && tableData.records.map((record, recordIndex) => (
-                  <tr key={recordIndex}>
-                    <td>{record.record_id}</td>
-                    {Object.keys(record).map((key) => (
-                      key !== "record_id" && <td key={key}>{record[key]}</td>
+          <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "28rem", overflow: "auto", marginTop: "20px" }}>
+            <div style={{ minWidth: "100%" }}>
+              <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
+                <colgroup>
+                  <col style={{ minWidth: "10rem" }} />
+                  {tableData.columnNames &&
+                    tableData.columnNames.map((columnName, index) => (
+                      columnName !== "record_id" && <col key={index} style={{ minWidth: "10rem" }} />
                     ))}
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th key="id" scope="col">ID</th>
+                    {tableData.columnNames &&
+                      tableData.columnNames.map((columnName, index) => (
+                        columnName !== "record_id" && (
+                          <th key={index}>{columnName} -
+                            {tableData.columnTypes[index] === "numeric"
+                              ? " numerica"
+                              : tableData.columnTypes[index] === "varchar"
+                                ? " texto"
+                                : tableData.columnTypes[index] === "bool"
+                                  ? " boolean"
+                                  : tableData.columnTypes[index]}
+                          </th>
+                        )
+                      ))}
                   </tr>
-                ))}
-                  </tbody>
+                </thead>
+                <tbody>
+                  {tableData.records &&
+                    tableData.records.map((record, recordIndex) => (
+                      <tr key={recordIndex}>
+                        <td>{record.record_id}</td>
+                        {Object.keys(record).map((key) => (
+                          key !== "record_id" && <td key={key}>{record[key]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                </tbody>
               </table>
-                
             </div>
           </div>
-      </div>
-    </body>
-  </div>
+
+        </div>
+      </body>
+    </div>
   )
 }
