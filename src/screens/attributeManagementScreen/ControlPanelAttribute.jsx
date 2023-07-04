@@ -88,7 +88,14 @@ export default function ControlPanelRuleManagement() {
                       <tr key={recordIndex}>
                         <td>{record.record_id}</td>
                         {Object.keys(record).map((key) => (
-                          key !== "record_id" && <td key={key}>{record[key]}</td>
+                          key !== "record_id" &&
+                           <td key={key}>
+                            {typeof record[key] === 'boolean' ? (
+                                record[key] ? 'Verdadero' : 'Falso'
+                              ) : (
+                                record[key]
+                              )}
+                            </td>
                         ))}
                       </tr>
                     ))}
