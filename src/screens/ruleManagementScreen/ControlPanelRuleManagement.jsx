@@ -349,36 +349,50 @@ export default function ControlPanelRuleManagement() {
       <Header buttonText="Cerrar sesión" headerText="Panel de control" />
       <div className="logicalContainer">
         <h3>Datos</h3>
-        <div className="table-responsive" style={{ width: "80%" }}>
-          <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
-            <thead>
-              <tr>
-                <th key="id" scope="col">ID</th>
-                {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                  columnName !== "record_id" && <th key={index} className="">
-                    {columnName} -
-                    {tableData.columnTypes[index] === "numeric" ? " numerica" :
-                      tableData.columnTypes[index] === "varchar" ? " texto" :
-                        tableData.columnTypes[index] === "bool" ? " boolean" :
-                          tableData.columnTypes[index]}
-                  </th>
+        <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "20rem", overflow: "auto", marginTop: "20px" }}>
+            <div style={{ minWidth: "100%" }}>
+              <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
+                <colgroup>
+                  <col style={{ minWidth: "10rem" }} />
+                  {tableData.columnNames &&
+                    tableData.columnNames.map((columnName, index) => (
+                      columnName !== "record_id" && <col key={index} style={{ minWidth: "10rem" }} />
+                    ))}
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th key="id" scope="col">ID</th>
+                    {tableData.columnNames &&
+                      tableData.columnNames.map((columnName, index) => (
+                        columnName !== "record_id" && (
+                          <th key={index}>{columnName} -
+                            {tableData.columnTypes[index] === "numeric"
+                              ? " numerica"
+                              : tableData.columnTypes[index] === "varchar"
+                                ? " texto"
+                                : tableData.columnTypes[index] === "bool"
+                                  ? " boolean"
+                                  : tableData.columnTypes[index]}
+                          </th>
+                        )
+                      ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.records &&
+                    tableData.records.map((record, recordIndex) => (
+                      <tr key={recordIndex}>
+                        <td>{record.record_id}</td>
+                        {Object.keys(record).map((key) => (
+                          key !== "record_id" && <td key={key}>{record[key]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.records && tableData.records.map((record, recordIndex) => (
-                <tr key={recordIndex}>
-                  <td>{record.record_id}</td>
-                  {Object.keys(record).map((key) => (
-                    key !== "record_id" && <td key={key}>{record[key]}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-        </div>
 
 
 
@@ -409,7 +423,7 @@ export default function ControlPanelRuleManagement() {
                     value={selectedColumn2}
                     onChange={handleColumn2Change}
                     disabled={!opColumn2}
-                    style={{marginTop:"2vh", width: "80%", marginBottom: "2vh"}}
+                    style={{ marginTop: "2vh", width: "80%", marginBottom: "2vh" }}
                   >
                     <option value="">Columna</option>
                     {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
@@ -417,11 +431,11 @@ export default function ControlPanelRuleManagement() {
                     ))}
                   </select>
 
-                <div className="container2" style={{ justifyContent: "center", width: "100%" }}>
-                  <input style={{ width: "50%" }} type="text" className="inputAssign" placeholder="Valor" value={inputValue} onChange={handleInputValueChange} disabled={!inputEnable} />
-                  <ButtonType1 marginL="5px" text="Ok" onClick={handleClickInputValue} disabled={!inputEnable} w="25%" h="6vh" />
+                  <div className="container2" style={{ justifyContent: "center", width: "100%" }}>
+                    <input style={{ width: "50%" }} type="text" className="inputAssign" placeholder="Valor" value={inputValue} onChange={handleInputValueChange} disabled={!inputEnable} />
+                    <ButtonType1 marginL="5px" text="Ok" onClick={handleClickInputValue} disabled={!inputEnable} w="25%" h="6vh" />
+                  </div>
                 </div>
-              </div>
               </div>
 
 
@@ -462,7 +476,7 @@ export default function ControlPanelRuleManagement() {
           </div>
         </div>
         <h3 style={{ marginTop: "2rem" }}>Reglas</h3>
-        <div className="table-responsive">
+        <div className="table-responsive" style={{width: "80%"}}>
 
           {rules.length > 0 ? (
             <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>

@@ -12,6 +12,9 @@ import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 const baseUrl = "http://localhost:8091"
 
 function ControlePanelRecordManagement() {
+  const [tableData, setTableData] = useState([]);
+
+  const baseUrl = "http://localhost:8091";
 
   const [rules, setRules] = useState([]);
   const [records, setRecords] = useState([]);
@@ -23,6 +26,24 @@ function ControlePanelRecordManagement() {
   const [ruleSelected, setRuleSelected] = useState("");
 
   const navigation = useNavigate();
+
+  useEffect(() => {
+    const fetchTable = async () => {
+      const response = await axios.get(
+        baseUrl + "/table/table_data",
+        {
+          headers: {
+            "Access-Control-Allow-Origin": baseUrl,
+            "MediaType": "application/json"
+          }
+        }
+      );
+      const responseData = response.data;
+      setTableData(responseData);
+
+    };
+    fetchTable();
+  }, []);
 
   useEffect(() => {
 
@@ -112,6 +133,49 @@ function ControlePanelRecordManagement() {
             <ButtonIcon onClick={handleCreateRecord} marginL="1vw" marginT="1vw" text = "Crear registro"  w="24vw" h="6vh" img="reader-outline"/>
             <ButtonIcon onClick={handleOpenRecordManagement} marginL="1vw" marginT="1vw" text = "Gestionar registro"  w="24vw" h="6vh" img="settings-outline"/>
             <Button text = "Evaluar registro"  w="24vw" h="6vh" marginL="1vw" marginT="1vw" onClick={handleOpenEvaluateRule}/>
+          </div>
+          <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "28rem", overflow: "auto", marginTop: "20px" }}>
+            <div style={{ minWidth: "100%" }}>
+              <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
+                <colgroup>
+                  <col style={{ minWidth: "10rem" }} />
+                  {tableData.columnNames &&
+                    tableData.columnNames.map((columnName, index) => (
+                      columnName !== "record_id" && <col key={index} style={{ minWidth: "10rem" }} />
+                    ))}
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th key="id" scope="col">ID</th>
+                    {tableData.columnNames &&
+                      tableData.columnNames.map((columnName, index) => (
+                        columnName !== "record_id" && (
+                          <th key={index}>{columnName} -
+                            {tableData.columnTypes[index] === "numeric"
+                              ? " numerica"
+                              : tableData.columnTypes[index] === "varchar"
+                                ? " texto"
+                                : tableData.columnTypes[index] === "bool"
+                                  ? " boolean"
+                                  : tableData.columnTypes[index]}
+                          </th>
+                        )
+                      ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.records &&
+                    tableData.records.map((record, recordIndex) => (
+                      <tr key={recordIndex}>
+                        <td>{record.record_id}</td>
+                        {Object.keys(record).map((key) => (
+                          key !== "record_id" && <td key={key}>{record[key]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
       </div>
       {isPopupOpen === 0 && (
