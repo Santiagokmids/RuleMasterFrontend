@@ -27,30 +27,29 @@ function ControlePanelRecordManagement() {
   useEffect(() => {
 
     async function getData() {
-
       const resultRules = await getRules();
       setRules(resultRules);
-
+  
       const resultRecords = await getRecords();
       setRecords(resultRecords);
+  
+      const allRules = resultRules.map(rule => ({
+        label: rule.ruleName,
+        value: rule.ruleName
+      }));
+  
+      const allRecords = resultRecords.map(record => ({
+        label: record.record_id,
+        value: record.record_id
+      }));
+  
+      setOptionRecords(allRecords);
+      setOptionRules(allRules);
     }
-
+  
     getData();
-    
-    const allRules = rules.map(rule => ({
-      label: rule.ruleName,
-      value: rule.ruleName
-    }));
-
-    const allRecords = records.map(record => ({
-      label: record.record_id,
-      value: record.record_id
-    }));
-
-    setOptionRecords(allRecords);
-    setOptionRules(allRules);
-
-  }, [rules, records]);
+  
+  }, []);
 
   const handleLogout = async (event) => {
     event.preventDefault();
