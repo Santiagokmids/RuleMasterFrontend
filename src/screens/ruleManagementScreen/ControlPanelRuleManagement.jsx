@@ -3,7 +3,7 @@ import Header from "../../componente/Header";
 import "./css/CalculatorScreen.css";
 import Button from "../../componente/Button";
 import ButtonType1 from "../../componente/ButtonType1";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function ControlPanelRuleManagement() {
@@ -19,7 +19,7 @@ export default function ControlPanelRuleManagement() {
   const [rules, setRules] = useState([]);
 
 
-  const regexRulePattern= /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s){0,3}$/i;
+  const regexRulePattern = /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s){0,3}$/i;
   const regexNumber = /^\d+(\.\d+)?$/;
 
   const [openingBracket, setOpeningBracket] = useState(true);
@@ -36,29 +36,29 @@ export default function ControlPanelRuleManagement() {
   const [opColumn2, setOpColumn2] = useState(false)
   const [inputEnable, setInputEnable] = useState(false)
 
-  const baseUrl="http://localhost:8091";
+  const baseUrl = "http://localhost:8091";
 
   function handleColumnChange(event) {
     const { value, selectedIndex } = event.target;
     setSelectedColumn(value);
-    setRuleValue(prevValue => prevValue + value+' ');
+    setRuleValue(prevValue => prevValue + value + ' ');
 
     setOpColumn1(false);
 
-    if(tableData.columnTypes[selectedIndex] === "numeric"){
+    if (tableData.columnTypes[selectedIndex] === "numeric") {
       setSelectedColumnType("numeric");
       setGreaterThan(true);
       setLessThan(true);
       setEqualTo(true);
     }
 
-    if(tableData.columnTypes[selectedIndex] === "varchar" ){
+    if (tableData.columnTypes[selectedIndex] === "varchar") {
       setSelectedColumnType("varchar");
       setEqualTo(true);
       setDifferentFrom(true);
     }
 
-    if(tableData.columnTypes[selectedIndex] === "boolean"){
+    if (tableData.columnTypes[selectedIndex] === "boolean") {
       setSelectedColumnType("boolean");
       setEqualTo(true);
       setDifferentFrom(true);
@@ -71,7 +71,7 @@ export default function ControlPanelRuleManagement() {
   function handleColumn2Change(event) {
     const selectedOption = event.target.value;
     setSelectedColumn2(selectedOption);
-    setRuleValue(prevValue => prevValue + selectedOption+' ');
+    setRuleValue(prevValue => prevValue + selectedOption + ' ');
 
     setOpColumn2(false);
     setButtonTrue(false);
@@ -95,7 +95,7 @@ export default function ControlPanelRuleManagement() {
   const handleClickFinalBracket = () => {
     setRuleValue(prevValue => prevValue + ') ');
 
-   
+
     setFinalBracket(false);
     setButtonAnd(true);
     setButtonOr(true);
@@ -105,16 +105,16 @@ export default function ControlPanelRuleManagement() {
   const handleClickGreaterThan = () => {
     setRuleValue(prevValue => prevValue + 'MAYOR QUE ');
 
-    
-      setGreaterThan(false);
-      setEqualTo(false);
-      setGreaterThan(false);
-      setLessThan(false);
-      setDifferentFrom(false);
 
-      setOpColumn2(true);
-      setInputEnable(true);
-         
+    setGreaterThan(false);
+    setEqualTo(false);
+    setGreaterThan(false);
+    setLessThan(false);
+    setDifferentFrom(false);
+
+    setOpColumn2(true);
+    setInputEnable(true);
+
   };
 
   const handleClickLessThan = () => {
@@ -137,12 +137,12 @@ export default function ControlPanelRuleManagement() {
     setLessThan(false);
     setDifferentFrom(false);
 
-    if(selectedColumnType === "numeric" || selectedColumnType === "varchar"){
+    if (selectedColumnType === "numeric" || selectedColumnType === "varchar") {
       setOpColumn2(true);
       setInputEnable(true);
     }
 
-    if(selectedColumnType === "boolean"){
+    if (selectedColumnType === "boolean") {
       setOpColumn2(true);
       setButtonTrue(true);
       setButtonFalse(true);
@@ -157,12 +157,12 @@ export default function ControlPanelRuleManagement() {
     setLessThan(false);
     setDifferentFrom(false);
 
-    if(selectedColumnType === "varchar"){
+    if (selectedColumnType === "varchar") {
       setOpColumn2(true);
       setInputEnable(true);
     }
 
-    if(selectedColumnType === "boolean"){
+    if (selectedColumnType === "boolean") {
       setOpColumn2(true);
       setButtonTrue(true);
       setButtonFalse(true);
@@ -196,23 +196,23 @@ export default function ControlPanelRuleManagement() {
   const handleClickAnd = () => {
     setRuleValue(prevValue => prevValue + 'Y ');
 
-    if(!finalBracket){
+    if (!finalBracket) {
       setOpeningBracket(true);
-    }else{
+    } else {
       setOpColumn1(true);
     }
     setButtonAnd(false);
     setButtonOr(false);
     setFinalBracket(false);
-    
+
   };
 
   const handleClickOr = () => {
     setRuleValue(prevValue => prevValue + 'O ');
 
-    if(!finalBracket){
+    if (!finalBracket) {
       setOpeningBracket(true);
-    }else{
+    } else {
       setOpColumn1(true);
     }
 
@@ -224,7 +224,7 @@ export default function ControlPanelRuleManagement() {
 
   const handleInputValueChange = (event) => {
     setInputValue(event.target.value);
-  
+
   };
   const handleRuleNameChange = (event) => {
     setRuleName(event.target.value);
@@ -232,18 +232,18 @@ export default function ControlPanelRuleManagement() {
 
 
   const handleClickInputValue = () => {
-    var inputValueRule= inputValue.replace(/'/g,"");
-    var valid=true;
-    if(selectedColumnType==="varchar"){
-      inputValueRule="'"+inputValueRule+"'";
+    var inputValueRule = inputValue.replace(/'/g, "");
+    var valid = true;
+    if (selectedColumnType === "varchar") {
+      inputValueRule = "'" + inputValueRule + "'";
     }
-    if(selectedColumnType==="numeric" && !regexNumber.test(inputValueRule)){
-      valid=false;
+    if (selectedColumnType === "numeric" && !regexNumber.test(inputValueRule)) {
+      valid = false;
       alert("La columna se debe comparar con un numero");
     }
 
-    if(valid){
-      setRuleValue(prevValue => prevValue + inputValueRule+' ');
+    if (valid) {
+      setRuleValue(prevValue => prevValue + inputValueRule + ' ');
 
       setOpColumn2(false);
       setButtonTrue(false);
@@ -252,11 +252,11 @@ export default function ControlPanelRuleManagement() {
       setButtonAnd(true);
       setButtonOr(true);
       setFinalBracket(true);
-  
+
       setInputValue("");
     }
 
-    
+
   };
 
   const handleClickCleanAll = () => {
@@ -280,61 +280,65 @@ export default function ControlPanelRuleManagement() {
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchTable = async () => {
       const response = await axios.get(
-          baseUrl + "/table/table_data",
-          { headers: { 
-              "Access-Control-Allow-Origin":baseUrl,
-              "MediaType":"application/json"
-          } }
-          );
+        baseUrl + "/table/table_data",
+        {
+          headers: {
+            "Access-Control-Allow-Origin": baseUrl,
+            "MediaType": "application/json"
+          }
+        }
+      );
       const responseData = response.data;
       setTableData(responseData);
     };
     fetchTable();
 
-  const fetchRules = async () => {
-    const response = await axios.get(
+    const fetchRules = async () => {
+      const response = await axios.get(
         baseUrl + "/rules",
-        { headers: { 
-            "Access-Control-Allow-Origin":baseUrl,
-            "MediaType":"application/json"
-        } }
-        );
-    const responseData = response.data;
-    setRules(responseData);
-  };
-  fetchRules();
+        {
+          headers: {
+            "Access-Control-Allow-Origin": baseUrl,
+            "MediaType": "application/json"
+          }
+        }
+      );
+      const responseData = response.data;
+      setRules(responseData);
+    };
+    fetchRules();
 
   }, []);
 
-  
+
   const saveRule = async () => {
-   console.log(ruleValue)
-    const valid=regexRulePattern.test(ruleValue);
-    if(valid){
-      try{
+    console.log(ruleValue)
+    const valid = regexRulePattern.test(ruleValue);
+    if (valid) {
+      try {
         const response = await axios.post(
-          baseUrl+"/rules",
+          baseUrl + "/rules",
           {
-            ruleName:ruleName,
-            ruleDefinition:ruleValue
+            ruleName: ruleName,
+            ruleDefinition: ruleValue
           },
           {
             headers: {
               "Access-Control-Allow-Origin": baseUrl,
-              "MediaType":"application/json"
+              "MediaType": "application/json"
             },
           }
         );
         alert("La regla se ha agregado correctamente")
         window.location.reload();
-      }catch (error) {
-        alert("La regla no se pudo agregar "+error.response.data.details[0].errorMessage)
+      } catch (error) {
+        alert("La regla no se pudo agregar " + error.response.data.details[0].errorMessage)
       }
-      
-    }else{
+
+    } else {
       alert("Solo se permiten maximo 4 expresiones dentro de un parentesis, y maximo 4 parentesis")
     }
 
@@ -342,131 +346,146 @@ export default function ControlPanelRuleManagement() {
 
   return (
     <div>
-        <Header buttonText="Cerrar sesión" headerText="Panel de control" />
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" />
       <div className="logicalContainer">
-      <h3>Datos</h3>
-        <div className="table-responsive">
-            <table className="table table-bordered border-dark" style={{tableLayout:"fixed"}}>
-              <thead>
-                <tr>
-                  <th  key="id" scope="col">ID</th>
-                  {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                   columnName !== "record_id" && <th  key={index} className="">
-                      {columnName} - 
-                      {tableData.columnTypes[index] === "numeric" ? " numerica" : 
-                       tableData.columnTypes[index] === "varchar"  ? " texto": 
-                        tableData.columnTypes[index] === "bool"  ? " boolean": 
-                       tableData.columnTypes[index]}
-                    </th>
-                    
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-              {tableData.records && tableData.records.map((record, recordIndex) => (
-              <tr key={recordIndex}>
-                <td>{record.record_id}</td>
-                {Object.keys(record).map((key) => (
-                  key !== "record_id" && <td key={key}>{record[key]}</td>
+        <h3>Datos</h3>
+        <div className="table-responsive" style={{ width: "80%" }}>
+          <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
+            <thead>
+              <tr>
+                <th key="id" scope="col">ID</th>
+                {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                  columnName !== "record_id" && <th key={index} className="">
+                    {columnName} -
+                    {tableData.columnTypes[index] === "numeric" ? " numerica" :
+                      tableData.columnTypes[index] === "varchar" ? " texto" :
+                        tableData.columnTypes[index] === "bool" ? " boolean" :
+                          tableData.columnTypes[index]}
+                  </th>
+
                 ))}
               </tr>
-            ))}
-              </tbody>
-          </table>
-            
-        </div>
-
-        <h3>Reglas</h3>
-        <div className="table-responsive">
-          
-          {rules.length>0? (
-          <table className="table table-bordered border-dark" style={{tableLayout:"fixed"}}>
-            <thead>
-                <tr>
-                <th scope="col">Nombre </th>
-                <th scope="col" >Regla</th>
-                </tr>
             </thead>
             <tbody>
-              {rules.map((rule, index) => (
-                <tr key={index}>
-                  <td>{rule.ruleName}</td>
-                  <td>{rule.ruleDefinition}</td>
+              {tableData.records && tableData.records.map((record, recordIndex) => (
+                <tr key={recordIndex}>
+                  <td>{record.record_id}</td>
+                  {Object.keys(record).map((key) => (
+                    key !== "record_id" && <td key={key}>{record[key]}</td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
-          ): (
-            <div className="">
-              <p className="">No hay reglas agregadas</p>
-            </div>
-          )}
+
         </div>
 
+
+
         <div>
-            <div className="resultContainer">
-                    <input type="text" className="" placeholder="Nombre regla" value={ruleName} onChange={handleRuleNameChange}/>
-                    <input type="text" className="result" placeholder="Regla" value={ruleValue} disabled/>
-                    <button className="result" style={{width: "4vw", marginLeft: "0.5vw"}} onClick={handleClickCleanAll}><ion-icon name="arrow-back-outline"></ion-icon></button>
-                    <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw" onClick={saveRule}/>
-                    {/* <Button text="Gestionar regla" w="12vw" h="6vh" marginL="0.6vw" />*/}
-            </div>
+          <div className="resultContainer">
+            <input type="text" className="inputAssign" placeholder="Nombre regla" value={ruleName} onChange={handleRuleNameChange} style={{ marginRight: "2vw", width: "15vw" }} />
+            <input type="text" className="result" placeholder="Regla" value={ruleValue} disabled />
+            <button className="result" style={{ width: "4vw", marginLeft: "0.5vw" }} onClick={handleClickCleanAll}><ion-icon name="arrow-back-outline"></ion-icon></button>
+            <Button text="Guardar regla" w="12vw" h="6vh" marginL="0.6vw" onClick={saveRule} />
+            {/* <Button text="Gestionar regla" w="12vw" h="6vh" marginL="0.6vw" />*/}
+          </div>
+          <div className="container2">
 
-            <div className="operationsContainer">
-                <select
-                  className="form-control"
-                  id="selectColumns"
-                  name="columns"
-                  value={selectedColumn} 
-                  onChange={handleColumnChange}
-                  disabled={!opColumn1}
-                >
-                    <option value="">Columna</option>
-                    {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                         columnName !== "record_id"  && <option key={index}>{columnName}</option>
-                    ))}
-                   
-                    
-                </select>
-                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>(</div>} onClick={handleClickOpeningBracket} disabled={!openingBracket} w="10vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text={<div>)</div>} onClick={handleClickFinalBracket} disabled={!finalBracket} w="10vw" h="15vh" />
-
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Mayor que" onClick={handleClickGreaterThan} disabled={!greaterThan} w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Menor que" onClick={handleClickLessThan} disabled={!lessThan} w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Igual a" onClick={handleClickEqualTo} disabled={!equalTo} w="8vw" h="15vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Diferente a" onClick={handleClickDifferentFrom} disabled={!differentFrom} w="8vw" h="15vh" />
+            <div className="operationsContainerColumn" style={{ width: "30vw" }}>
+              Valores a comparar.
+              <div style={{ width: "78%", marginTop: "10px", marginBottom: "10px" }} className="container2">
                 <div className="logicalContainer">
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Verdadero" onClick={handleClickTrue} disabled={!buttonTrue} w="8vw" h="6vh" />
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Falso" onClick={handleClickFalse} disabled={!buttonFalse} w="8vw" h="6vh" />
+                  <ButtonType1 marginL="1vw" marginT="2vh" text="Verdadero" onClick={handleClickTrue} disabled={!buttonTrue} w="7vw" h="6vh" />
+                  <ButtonType1 marginL="1vw" marginT="2vh" text="Falso" onClick={handleClickFalse} disabled={!buttonFalse} w="7vw" h="6vh" />
 
                 </div>
-
-
                 <div className="logicalContainer">
-                
                   <select
                     className="form-control"
                     id="selectColumns2"
                     name="columns2"
-                    
-                    value={selectedColumn2} 
+
+                    value={selectedColumn2}
                     onChange={handleColumn2Change}
                     disabled={!opColumn2}
+                    style={{marginTop:"2vh", width: "80%", marginBottom: "2vh"}}
                   >
-                      <option value="">Columna</option>
-                      {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
-                           columnName !== "record_id" && tableData.columnTypes[index]===selectedColumnType &&  <option key={index}>{columnName}</option>
+                    <option value="">Columna</option>
+                    {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                      columnName !== "record_id" && tableData.columnTypes[index] === selectedColumnType && <option key={index}>{columnName}</option>
                     ))}
                   </select>
-                  
-                  <input type="text" className="" placeholder="Valor" value={inputValue}  onChange={handleInputValueChange} disabled={!inputEnable}/>
-                  <ButtonType1 marginL="2vw" marginT="2vh" text="Valor" onClick={handleClickInputValue} disabled={!inputEnable} w="10vw" h="6vh" />
+
+                <div className="container2" style={{ justifyContent: "center", width: "100%" }}>
+                  <input style={{ width: "50%" }} type="text" className="inputAssign" placeholder="Valor" value={inputValue} onChange={handleInputValueChange} disabled={!inputEnable} />
+                  <ButtonType1 marginL="5px" text="Ok" onClick={handleClickInputValue} disabled={!inputEnable} w="25%" h="6vh" />
                 </div>
-                <div className="logicalContainer">
-                <ButtonType1 marginL="2vw" marginT="2vh" text="Y" onClick={handleClickAnd} disabled={!buttonAnd} w="10vw" h="6vh" />
-                <ButtonType1 marginL="2vw" marginT="2vh" text="O" onClick={handleClickOr} disabled={!buttonOr} w="10vw" h="6vh" />
-                </div>
+              </div>
+              </div>
+
+
+
+
             </div>
+
+            <div className="operationsContainer" style={{ width: "60vw" }}>
+              <select
+                className="form-control"
+                id="selectColumns"
+                name="columns"
+                value={selectedColumn}
+                onChange={handleColumnChange}
+                disabled={!opColumn1}
+                style={{ width: "8vw", height: "6vh" }}
+              >
+                <option value="">Columna</option>
+                {tableData.columnNames && tableData.columnNames.map((columnName, index) => (
+                  columnName !== "record_id" && <option key={index}>{columnName}</option>
+                ))}
+
+
+              </select>
+
+              <ButtonType1 marginL="1vw" marginT="2vh" text={<div>(</div>} onClick={handleClickOpeningBracket} disabled={!openingBracket} w="5vw" h="15vh" />
+              <ButtonType1 marginL="1vw" marginT="2vh" text={<div>)</div>} onClick={handleClickFinalBracket} disabled={!finalBracket} w="5vw" h="15vh" />
+              <ButtonType1 marginL="1vw" marginT="2vh" text="Mayor que" onClick={handleClickGreaterThan} disabled={!greaterThan} w="7vw" h="15vh" />
+              <ButtonType1 marginL="1vw" marginT="2vh" text="Menor que" onClick={handleClickLessThan} disabled={!lessThan} w="7vw" h="15vh" />
+              <ButtonType1 marginL="1vw" marginT="2vh" text="Igual a" onClick={handleClickEqualTo} disabled={!equalTo} w="7vw" h="15vh" />
+              <ButtonType1 marginL="1vw" marginT="2vh" text="Diferente a" onClick={handleClickDifferentFrom} disabled={!differentFrom} w="7vw" h="15vh" />
+              <div className="logicalContainer">
+                <ButtonType1 marginL="1vw" marginT="2vh" text="Y" onClick={handleClickAnd} disabled={!buttonAnd} w="5vw" h="6vh" />
+                <ButtonType1 marginL="1vw" marginT="2vh" text="O" onClick={handleClickOr} disabled={!buttonOr} w="5vw" h="6vh" />
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <h3 style={{ marginTop: "2rem" }}>Reglas</h3>
+        <div className="table-responsive">
+
+          {rules.length > 0 ? (
+            <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
+              <thead>
+                <tr>
+                  <th scope="col">Nombre </th>
+                  <th scope="col" >Regla</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rules.map((rule, index) => (
+                  <tr key={index}>
+                    <td>{rule.ruleName}</td>
+                    <td>{rule.ruleDefinition}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="">
+              <p className="">No hay reglas agregadas</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
