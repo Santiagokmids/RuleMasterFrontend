@@ -110,7 +110,16 @@ function ControlePanelRecordManagement() {
       );
 
       if (response.status === 200) {
-        alert("El resultado de evaluar el registro con id "+record+" con la regla "+ruleSelected+" es: "+eval(response.data));
+        var result = "";
+
+        if(eval(response.data)){
+          result = "verdadero";  
+
+        }else{
+          result = "falso";
+        }
+
+        alert("El resultado de evaluar el registro "+record+" con la regla "+ruleSelected+" es: "+result);
         handleClose();
       }
     }
