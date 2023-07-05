@@ -5,7 +5,7 @@ import Button from "../componente/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import InputLogin from "../componente/InputLogin";
+import InputLogin from "../componente/InputLogin"
 
 
 const Login = ({ setLogin }) =>{
@@ -19,7 +19,6 @@ const Login = ({ setLogin }) =>{
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
 
       const { data } = await axios.post(
@@ -48,9 +47,8 @@ const Login = ({ setLogin }) =>{
         });
 
         const user=response.data;
-        const role=user.roleName
+        const role=user.role
         localStorage.setItem("currentRole",role);
-        
         if(role === "Administrador"){
             navigation("/admin");
         }
@@ -82,24 +80,25 @@ const Login = ({ setLogin }) =>{
             <h1 className="loginText">¡Bienvenido!</h1>
             <h2 className="loginText">Inicia sesión para continuar</h2>
           </div>
-          <>
-          <InputLogin 
+          <form onSubmit={handleSubmit}>
+           <InputLogin 
             marginT="1.5vw" w="24vw" h="6vh" type="text" 
             placeholder="Email" icon="at-outline" 
             value={username}
-            onChange={(event) => setUsername(event.target.value)}                              
+            onChange={u => setUsername(u)}                              
           />
           <InputLogin 
             marginT="1.5vw" w="24vw" h="6vh" type="password" 
             placeholder="Contraseña" icon="lock-closed-outline"  
-            value={password}onChange={(event) => setPassword(event.target.value)} 
+            value={password}onChange={p => setPassword(p)} 
           />
 
-          </>
+            <div className="logButton">
+              <Button type="submit" w="20vw" h="6vh" text="Login" marginT="5vh" marginL="0vw" fontsize="1.5rem"  />
+            </div>
+          </form>
 
-          <div className="logButton">
-              <Button w="20vw" h="6vh" text="Login" marginT="5vh" marginL="0vw" fontsize="1.5rem" onClick={handleSubmit} />
-          </div>
+         
         </div>
         <img className="coffeImg" src={img} alt="" />
       </div>

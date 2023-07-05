@@ -31,61 +31,75 @@ function ControlePanelRecordManagement() {
 
   useEffect(() => {
    
-    const user = localStorage.getItem("currentRole");
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    if(user){
-      setCurrentUser(user);
+      if(user){
+        setCurrentUser(user);
+      }
+
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/table/table_data",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
+          }
+        );
+        const responseData = response.data;
+        setTableData(responseData);
+  
+      };
+      fetchTable();
+
+    }else{
+      navigation("/NotFound");
     }
 
-    const fetchTable = async () => {
-      var token=localStorage.getItem("jwt");
-      const response = await axios.get(
-        baseUrl + "/table/table_data",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json",
-            Authorization: `Bearer ${token}` 
-          }
-        }
-      );
-      const responseData = response.data;
-      setTableData(responseData);
-
-    };
-    fetchTable();
+    
   }, []);
 
   useEffect(() => {
    
-    const user = localStorage.getItem("currentRole");
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    if(user){
-      setCurrentUser(user);
+      if(user){
+        setCurrentUser(user);
+      }
+
+      async function getData() {
+        const resultRules = await getRules();
+        setRules(resultRules);
+    
+        const resultRecords = await getRecords();
+        setRecords(resultRecords);
+    
+        const allRules = resultRules.map(rule => ({
+          label: rule.ruleName,
+          value: rule.ruleName
+        }));
+    
+        const allRecords = resultRecords.map(record => ({
+          label: record.record_id,
+          value: record.record_id
+        }));
+    
+        setOptionRecords(allRecords);
+        setOptionRules(allRules);
+      }
+    
+      getData();
+      
+    }else{
+      navigation("/NotFound");
     }
 
-    async function getData() {
-      const resultRules = await getRules();
-      setRules(resultRules);
-  
-      const resultRecords = await getRecords();
-      setRecords(resultRecords);
-  
-      const allRules = resultRules.map(rule => ({
-        label: rule.ruleName,
-        value: rule.ruleName
-      }));
-  
-      const allRecords = resultRecords.map(record => ({
-        label: record.record_id,
-        value: record.record_id
-      }));
-  
-      setOptionRecords(allRecords);
-      setOptionRules(allRules);
-    }
-  
-    getData();
+    
   
   }, []);
 
@@ -155,7 +169,7 @@ function ControlePanelRecordManagement() {
     { label: "Eliminar registro", value: "Eliminar registro" },
   ];
 
-  if(currentUser !== "Gesto_de_registros"){
+  if(currentUser !== "Gestor_de_registros"){
     navigation("/NotFound");
   }
 

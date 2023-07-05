@@ -27,11 +27,15 @@ export default function AddColumn() {
   ];
   
   useEffect(() => {
-   
-    const user = localStorage.getItem("currentRole");
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    if(user){
-      setCurrentUser(user);
+      if(user){
+        setCurrentUser(user);
+      }
+
+    }else{
+      navigation("/NotFound");
     }
        
   }, []);

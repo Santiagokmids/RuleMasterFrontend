@@ -17,29 +17,35 @@ export default function ControlPanelRuleManagement() {
 
   useEffect(() => {
    
-    const user = localStorage.getItem("currentRole");
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    if(user){
-      setCurrentUser(user);
+      if(user){
+        setCurrentUser(user);
+      }
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/table/table_data",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
+          }
+        );
+        const responseData = response.data;
+        setTableData(responseData);
+  
+      };
+      fetchTable();
+
+    }else{
+      navigation("/NotFound");
     }
 
-    const fetchTable = async () => {
-      var token=localStorage.getItem("jwt");
-      const response = await axios.get(
-        baseUrl + "/table/table_data",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json",
-            Authorization: `Bearer ${token}` 
-          }
-        }
-      );
-      const responseData = response.data;
-      setTableData(responseData);
-
-    };
-    fetchTable();
+    
   }, []);
 
 

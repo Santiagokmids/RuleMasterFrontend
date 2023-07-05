@@ -4,7 +4,7 @@ ion-icon {
     margin-right: 0.5rem;
   }
   
-  .IconTextInputWrapper {
+  .InputLoginWrapper {
     display: flex;
     align-items: center;
     border-radius: 10px;
@@ -13,14 +13,14 @@ ion-icon {
     flex-shrink: 0;
   }
   
-  .IconTextInputContainer{
+  .InputLoginContainer{
       border-left: 1px solid black;
       width: 85%;
       padding-left: 2%;
       margin-left: 2%;
   }
   
-  .IconTextInput {
+  .InputLogin {
     border: none;
     border-left-color: black;
     background: #ffffff;
@@ -32,7 +32,7 @@ ion-icon {
   
   }
   
-  .IconTextInput:focus {
+  .InputLogin:focus {
     outline: none;
   }
   
