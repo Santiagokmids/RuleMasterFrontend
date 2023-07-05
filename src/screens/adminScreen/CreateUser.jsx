@@ -21,7 +21,6 @@ function Createuser() {
     { label: "Administrador", value: "Administrador" },
     { label: "Gestor de registros", value: "Gestor de registros" },
     { label: "Gestor de reglas", value: "Gestor de reglas" },
-    { label: "Evaluador de reglas", value: "Evaluador de reglas" },
     { label: "Gestor de Columnas", value: "Gestor de Columnas" },
   ];
 
