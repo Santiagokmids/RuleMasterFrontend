@@ -1,0 +1,38 @@
+ion-icon {
+    font-size: 1.5rem;
+    color: var(--ion-color-primary);
+    margin-right: 0.5rem;
+  }
+  
+  .IconTextInputWrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background: #ffffff;
+    padding-left: 1%;
+    flex-shrink: 0;
+  }
+  
+  .IconTextInputContainer{
+      border-left: 1px solid black;
+      width: 85%;
+      padding-left: 2%;
+      margin-left: 2%;
+  }
+  
+  .IconTextInput {
+    border: none;
+    border-left-color: black;
+    background: #ffffff;
+    font-family: Poppins;
+    color: black;
+    font-size: 1.2em;
+    font-weight: 800;
+    width: 100%;
+  
+  }
+  
+  .IconTextInput:focus {
+    outline: none;
+  }
+  

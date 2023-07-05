@@ -4,6 +4,7 @@ import "./css/CalculatorScreen.css";
 import Button from "../../componente/Button";
 import ButtonType1 from "../../componente/ButtonType1";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ControlPanelRuleManagement() {
@@ -37,6 +38,8 @@ export default function ControlPanelRuleManagement() {
   const [inputEnable, setInputEnable] = useState(false)
 
   const baseUrl = "http://localhost:8091";
+
+  const navigation = useNavigate();
 
   function handleColumnChange(event) {
     const { value, selectedIndex } = event.target;
@@ -341,7 +344,7 @@ export default function ControlPanelRuleManagement() {
         alert("La regla se ha agregado correctamente")
         window.location.reload();
       } catch (error) {
-        alert("La regla no se pudo agregar " + error.response.data.details[0].errorMessage)
+        alert("La regla no se pudo agregar. " + error.response.data.details[0].errorMessage)
       }
 
     } else {
