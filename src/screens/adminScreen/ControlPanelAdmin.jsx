@@ -15,22 +15,39 @@ function ControlPanelAdmin() {
 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const navigation = useNavigate();
 
   useEffect(() => {
 
-    async function getData() {
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-      const resultUsers = await getUsers();
-      setUsers(resultUsers);
+      if(user){
+        setCurrentUser(user);
+      }
+
+      async function getData() {
+
+        const resultUsers = await getUsers();
+        setUsers(resultUsers);
+      }
+  
+      getData();
+
+    }else{
+      navigation("/NotFound");
     }
-
-    getData();
+    
+    
   }, []);
 
   const handleLogout = async (event) => {
     event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -52,6 +69,10 @@ function ControlPanelAdmin() {
     { label: "Eliminar usuario", value: "Eliminar usuario" },
     ];
 
+    if(currentUser !== "Administrador"){
+      navigation("/NotFound");
+    }
+
   return (
     <div>
       <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
@@ -59,7 +80,6 @@ function ControlPanelAdmin() {
 
         <div className="containerBase" style={{ width: "80vw" }}>
           <br />
-          <p className="h2">Usuarios registrados</p>
 
           <div className="containerBase2">
             <IconTextInput marginT="1.5vw" w="24vw" h="6vh" type="text" placeholder="Buscar Usuario" icon="search-outline" />
@@ -68,6 +88,8 @@ function ControlPanelAdmin() {
           </div>
 
           <br />
+          <p className="h2">Usuarios registrados</p>
+
           <div className="container">
             <br />
             <div className="table-responsive">
@@ -104,13 +126,14 @@ function ControlPanelAdmin() {
 }
 
 async function getUsers(){
-
+  var token=localStorage.getItem("jwt");
   const users = await axios.get(
     baseUrl+"/users",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )

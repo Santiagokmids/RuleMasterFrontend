@@ -10,31 +10,50 @@ import axios from "axios";
 export default function ControlPanelRuleManagement() {
   const navigation = useNavigate();
   const [tableData, setTableData] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const baseUrl = "http://localhost:8091";
 
 
   useEffect(() => {
-    const fetchTable = async () => {
-      const response = await axios.get(
-        baseUrl + "/table/table_data",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
-          }
-        }
-      );
-      const responseData = response.data;
-      setTableData(responseData);
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    };
-    fetchTable();
+      if(user){
+        setCurrentUser(user);
+      }
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/table/table_data",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
+          }
+        );
+        const responseData = response.data;
+        setTableData(responseData);
+  
+      };
+      fetchTable();
+
+    }else{
+      navigation("/NotFound");
+    }
+
+    
   }, []);
 
 
   const handleLogout = async (event) => {
     event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -42,6 +61,10 @@ export default function ControlPanelRuleManagement() {
     event.preventDefault();
     navigation("/createColumn");
   };
+
+  if(currentUser !== "Gestor_de_columnas"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >
@@ -52,6 +75,8 @@ export default function ControlPanelRuleManagement() {
             <ButtonIcon marginL="1vw" marginT="1vw" text="Gestionar Columnas" w="36vw" h="6vh" img="reader-outline" />
             <Button onClick={handleCreateColumn} text="Agregar Columnas" w="36vw" h="6vh" marginL="1vw" marginT="1vw" />
           </div>
+          <br />
+          <p className="h2">Registros</p>
 
           <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "28rem", overflow: "auto", marginTop: "20px" }}>
             <div style={{ minWidth: "100%" }}>

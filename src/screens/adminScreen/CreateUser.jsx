@@ -1,7 +1,7 @@
 import Dropdown from "../../componente/Dropdown";
 import Header from "../../componente/Header";
 import FormInput from "../../componente/FormInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +21,6 @@ function Createuser() {
     { label: "Administrador", value: "Administrador" },
     { label: "Gestor de registros", value: "Gestor de registros" },
     { label: "Gestor de reglas", value: "Gestor de reglas" },
-    { label: "Evaluador de reglas", value: "Evaluador de reglas" },
     { label: "Gestor de Columnas", value: "Gestor de Columnas" },
   ];
 
@@ -30,6 +29,22 @@ function Createuser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+
+  useEffect(() => {
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
+
+      if(user){
+        setCurrentUser(user);
+      }
+
+    }else{
+      navigation("/NotFound");
+    }
+       
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,6 +52,7 @@ function Createuser() {
     if(role !== ""){
 
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/users",
           {
             name,
@@ -49,13 +65,14 @@ function Createuser() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );
   
         if (response.status === 200) {
           alert("El usuario fue creado con éxito!");
-          navigation("/login");
+          navigation("/admin");
   
         }
       }
@@ -75,6 +92,9 @@ function Createuser() {
     navigation("/admin");
   }
 
+  if(currentUser !== "Administrador"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

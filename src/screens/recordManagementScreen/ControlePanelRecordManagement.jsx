@@ -25,55 +25,89 @@ function ControlePanelRecordManagement() {
   const [record, setRecord] = useState("");
   const [ruleSelected, setRuleSelected] = useState("");
 
+  const [currentUser, setCurrentUser] = useState("");
+
   const navigation = useNavigate();
 
   useEffect(() => {
-    const fetchTable = async () => {
-      const response = await axios.get(
-        baseUrl + "/table/table_data",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
-          }
-        }
-      );
-      const responseData = response.data;
-      setTableData(responseData);
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    };
-    fetchTable();
+      if(user){
+        setCurrentUser(user);
+      }
+
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/table/table_data",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
+          }
+        );
+        const responseData = response.data;
+        setTableData(responseData);
+  
+      };
+      fetchTable();
+
+    }else{
+      navigation("/NotFound");
+    }
+
+    
   }, []);
 
   useEffect(() => {
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    async function getData() {
-      const resultRules = await getRules();
-      setRules(resultRules);
-  
-      const resultRecords = await getRecords();
-      setRecords(resultRecords);
-  
-      const allRules = resultRules.map(rule => ({
-        label: rule.ruleName,
-        value: rule.ruleName
-      }));
-  
-      const allRecords = resultRecords.map(record => ({
-        label: record.record_id,
-        value: record.record_id
-      }));
-  
-      setOptionRecords(allRecords);
-      setOptionRules(allRules);
+      if(user){
+        setCurrentUser(user);
+      }
+
+      async function getData() {
+        const resultRules = await getRules();
+        setRules(resultRules);
+    
+        const resultRecords = await getRecords();
+        setRecords(resultRecords);
+    
+        const allRules = resultRules.map(rule => ({
+          label: rule.ruleName,
+          value: rule.ruleName
+        }));
+    
+        const allRecords = resultRecords.map(record => ({
+          label: record.record_id,
+          value: record.record_id
+        }));
+    
+        setOptionRecords(allRecords);
+        setOptionRules(allRules);
+      }
+    
+      getData();
+      
+    }else{
+      navigation("/NotFound");
     }
-  
-    getData();
+
+    
   
   }, []);
 
   const handleLogout = async (event) => {
     event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -100,11 +134,13 @@ function ControlePanelRecordManagement() {
     event.preventDefault();
     
     try{
+      var token=localStorage.getItem("jwt");
       const response = await axios.get(baseUrl + "/rules/evaluate/"+record+"/"+ruleSelected,
         {
           headers:{
             "Access-Control-Allow-Origin": baseUrl,
             "MediaType" : "application/json",
+            Authorization: `Bearer ${token}` 
           }
         }
       );
@@ -133,6 +169,10 @@ function ControlePanelRecordManagement() {
     { label: "Eliminar registro", value: "Eliminar registro" },
   ];
 
+  if(currentUser !== "Gestor_de_registros"){
+    navigation("/NotFound");
+  }
+
   return (
     <div >
     <Header buttonText="Cerrar sesion" headerText="Panel de control" onClick={handleLogout}/>
@@ -141,8 +181,11 @@ function ControlePanelRecordManagement() {
           <div className="containerBase2">
             <ButtonIcon onClick={handleCreateRecord} marginL="1vw" marginT="1vw" text = "Crear registro"  w="24vw" h="6vh" img="reader-outline"/>
             <ButtonIcon onClick={handleOpenRecordManagement} marginL="1vw" marginT="1vw" text = "Gestionar registro"  w="24vw" h="6vh" img="settings-outline"/>
-            <Button text = "Evaluar registro"  w="24vw" h="6vh" marginL="1vw" marginT="1vw" onClick={handleOpenEvaluateRule}/>
+            <Button text = "Evaluar registro con regla"  w="24vw" h="6vh" marginL="1vw" marginT="1vw" onClick={handleOpenEvaluateRule}/>
           </div>
+          <br />
+          <p className="h2">Registros</p>
+
           <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "28rem", overflow: "auto", marginTop: "20px" }}>
             <div style={{ minWidth: "100%" }}>
               <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
@@ -215,13 +258,14 @@ function ControlePanelRecordManagement() {
 }
 
 async function getRules(){
-
+  var token=localStorage.getItem("jwt");
   const rules = await axios.get(
     baseUrl+"/rules",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )
@@ -230,13 +274,14 @@ async function getRules(){
 }
 
 async function getRecords(){
-
+  var token=localStorage.getItem("jwt");
   const records = await axios.get(
     baseUrl+"/table/table_data",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )

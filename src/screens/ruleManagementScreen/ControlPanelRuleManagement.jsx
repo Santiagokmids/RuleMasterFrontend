@@ -4,6 +4,7 @@ import "./css/CalculatorScreen.css";
 import Button from "../../componente/Button";
 import ButtonType1 from "../../componente/ButtonType1";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ControlPanelRuleManagement() {
@@ -17,6 +18,7 @@ export default function ControlPanelRuleManagement() {
 
   const [tableData, setTableData] = useState([]);
   const [rules, setRules] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
 
   const regexRulePattern = /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s){0,3}$/i;
@@ -37,6 +39,8 @@ export default function ControlPanelRuleManagement() {
   const [inputEnable, setInputEnable] = useState(false)
 
   const baseUrl = "http://localhost:8091";
+
+  const navigation = useNavigate();
 
   function handleColumnChange(event) {
     const { value, selectedIndex } = event.target;
@@ -281,35 +285,53 @@ export default function ControlPanelRuleManagement() {
 
 
   useEffect(() => {
-    const fetchTable = async () => {
-      const response = await axios.get(
-        baseUrl + "/table/table_data",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
-          }
-        }
-      );
-      const responseData = response.data;
-      setTableData(responseData);
-    };
-    fetchTable();
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-    const fetchRules = async () => {
-      const response = await axios.get(
-        baseUrl + "/rules",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
+      if(user){
+        setCurrentUser(user);
+      }
+
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/table/table_data",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
           }
-        }
-      );
-      const responseData = response.data;
-      setRules(responseData);
-    };
-    fetchRules();
+        );
+        const responseData = response.data;
+        setTableData(responseData);
+      };
+      fetchTable();
+  
+      const fetchRules = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+          baseUrl + "/rules",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": baseUrl,
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
+            }
+          }
+        );
+        const responseData = response.data;
+        setRules(responseData);
+      };
+      fetchRules();
+
+    }else{
+      navigation("/NotFound");
+    }
+
+    
 
   }, []);
 
@@ -319,6 +341,7 @@ export default function ControlPanelRuleManagement() {
     const valid = regexRulePattern.test(ruleValue);
     if (valid) {
       try {
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(
           baseUrl + "/rules",
           {
@@ -328,14 +351,15 @@ export default function ControlPanelRuleManagement() {
           {
             headers: {
               "Access-Control-Allow-Origin": baseUrl,
-              "MediaType": "application/json"
+              "MediaType": "application/json",
+              Authorization: `Bearer ${token}` 
             },
           }
         );
         alert("La regla se ha agregado correctamente")
         window.location.reload();
       } catch (error) {
-        alert("La regla no se pudo agregar " + error.response.data.details[0].errorMessage)
+        alert("La regla no se pudo agregar. " + error.response.data.details[0].errorMessage)
       }
 
     } else {
@@ -344,11 +368,24 @@ export default function ControlPanelRuleManagement() {
 
   };
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
+    navigation("/login");
+  };
+
+  if(currentUser !== "Gestor_de_reglas"){
+    navigation("/NotFound");
+  }
+
   return (
     <div>
-      <Header buttonText="Cerrar sesión" headerText="Panel de control" />
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
       <div className="logicalContainer">
-        <h3>Datos</h3>
+        <br />
+        <h3>Registros</h3>
         <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "20rem", overflow: "auto", marginTop: "20px" }}>
             <div style={{ minWidth: "100%" }}>
               <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>
@@ -402,7 +439,10 @@ export default function ControlPanelRuleManagement() {
 
 
 
-
+        <br/>
+        <br/>
+        <h3>Crear regla</h3>
+        <br/>
         <div>
           <div className="resultContainer">
             <input type="text" className="inputAssign" placeholder="Nombre regla" value={ruleName} onChange={handleRuleNameChange} style={{ marginRight: "2vw", width: "15vw" }} />
@@ -482,6 +522,7 @@ export default function ControlPanelRuleManagement() {
             </div>
           </div>
         </div>
+        <br/>
         <h3 style={{ marginTop: "2rem" }}>Reglas</h3>
         <div className="table-responsive" style={{width: "80%"}}>
 

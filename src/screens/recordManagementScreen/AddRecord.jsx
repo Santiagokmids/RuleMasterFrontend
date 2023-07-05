@@ -10,6 +10,7 @@ import axios from "axios";
 export default function AddRecord() {
 
   const [tableData, setTableData] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const baseUrl="http://localhost:8091";
 
@@ -21,21 +22,36 @@ export default function AddRecord() {
  
   };
 
+  
+  useEffect(() => {
+   
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
 
-  useEffect(()=>{
-    const fetchTable = async () => {
-      const response = await axios.get(
-          baseUrl + "/table/table_data",
-          { headers: { 
-              "Access-Control-Allow-Origin":baseUrl,
-              "MediaType":"application/json"
-          } }
-          );
-      const responseData = response.data;
-      setTableData(responseData);
+      if(user){
+        setCurrentUser(user);
+      }
 
-    };
-    fetchTable();
+      const fetchTable = async () => {
+        var token=localStorage.getItem("jwt");
+        const response = await axios.get(
+            baseUrl + "/table/table_data",
+            { headers: { 
+                "Access-Control-Allow-Origin":baseUrl,
+                "MediaType":"application/json",
+                Authorization: `Bearer ${token}` 
+            } }
+            );
+        const responseData = response.data;
+        setTableData(responseData);
+  
+      };
+      fetchTable();
+    }else{
+      navigation("/NotFound");
+    }
+
+    
   }, []);
 
   useEffect(() => {
@@ -56,6 +72,7 @@ export default function AddRecord() {
   const handleSubmit = async (event) => {
     event.preventDefault();
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/table/addRecord",
           {
             tableName:"table_data",
@@ -65,6 +82,7 @@ export default function AddRecord() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );
@@ -83,6 +101,9 @@ export default function AddRecord() {
     navigation("/recordManagement");
   };
 
+  if(currentUser !== "Gestor_de_registros"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

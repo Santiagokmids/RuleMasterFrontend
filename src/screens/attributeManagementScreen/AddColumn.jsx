@@ -18,15 +18,32 @@ export default function AddColumn() {
 
   const navigation = useNavigate();
 
+  const [currentUser, setCurrentUser] = useState("");
+
   const selectOptions = [
     { label: "Texto", value: "varchar" },
     { label: "Numerica", value: "numeric" },
     { label: "Booleana", value: "boolean" }
   ];
   
+  useEffect(() => {
+    if(localStorage.getItem("jwt")){
+      const user = localStorage.getItem("currentRole");
+
+      if(user){
+        setCurrentUser(user);
+      }
+
+    }else{
+      navigation("/NotFound");
+    }
+       
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/table/addColumn",
           {
             tableName:"table_data",
@@ -37,6 +54,7 @@ export default function AddColumn() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );
@@ -55,6 +73,9 @@ export default function AddColumn() {
     navigation("/attributeManagement");
   };
 
+  if(currentUser !== "Gestor_de_columnas"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >
