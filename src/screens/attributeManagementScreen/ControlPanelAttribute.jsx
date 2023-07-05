@@ -37,6 +37,8 @@ export default function ControlPanelRuleManagement() {
 
   const handleLogout = async (event) => {
     event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
     navigation("/login");
   };
 

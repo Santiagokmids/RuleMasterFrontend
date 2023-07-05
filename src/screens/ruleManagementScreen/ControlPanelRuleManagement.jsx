@@ -350,9 +350,16 @@ export default function ControlPanelRuleManagement() {
 
   };
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
+    navigation("/login");
+  };
+
   return (
     <div>
-      <Header buttonText="Cerrar sesión" headerText="Panel de control" />
+      <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
       <div className="logicalContainer">
         <h3>Datos</h3>
         <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "20rem", overflow: "auto", marginTop: "20px" }}>
