@@ -38,7 +38,7 @@ export default function ControlPanelRuleManagement() {
   const [opColumn2, setOpColumn2] = useState(false)
   const [inputEnable, setInputEnable] = useState(false)
 
-  const baseUrl = "http://localhost:8091";
+  const baseUrl = "http://18.212.78.123:8091";
 
   const navigation = useNavigate();
 
