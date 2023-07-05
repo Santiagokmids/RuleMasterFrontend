@@ -18,6 +18,7 @@ export default function ControlPanelRuleManagement() {
 
   const [tableData, setTableData] = useState([]);
   const [rules, setRules] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
 
   const regexRulePattern = /^\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s((Y|O)\s\(\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s((Y|O)\s[A-Za-z0-9]+\s(MAYOR QUE|MENOR QUE|IGUAL A|DIFERENTE A)\s[A-Za-z0-9']+\s){0,3}\)\s){0,3}$/i;
@@ -284,6 +285,13 @@ export default function ControlPanelRuleManagement() {
 
 
   useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+
     const fetchTable = async () => {
       var token=localStorage.getItem("jwt");
       const response = await axios.get(
@@ -357,8 +365,13 @@ export default function ControlPanelRuleManagement() {
     event.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
+
+  if(currentUser !== "Gestor_de_reglas"){
+    navigation("/NotFound");
+  }
 
   return (
     <div>

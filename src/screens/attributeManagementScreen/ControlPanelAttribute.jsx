@@ -10,11 +10,19 @@ import axios from "axios";
 export default function ControlPanelRuleManagement() {
   const navigation = useNavigate();
   const [tableData, setTableData] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const baseUrl = "http://localhost:8091";
 
 
   useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+
     const fetchTable = async () => {
       var token=localStorage.getItem("jwt");
       const response = await axios.get(
@@ -39,6 +47,7 @@ export default function ControlPanelRuleManagement() {
     event.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -46,6 +55,10 @@ export default function ControlPanelRuleManagement() {
     event.preventDefault();
     navigation("/createColumn");
   };
+
+  if(currentUser !== "Gestor_de_columnas"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

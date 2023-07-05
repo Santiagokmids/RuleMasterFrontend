@@ -49,16 +49,22 @@ const Login = ({ setLogin }) =>{
 
         const user=response.data;
         const role=user.roleName
+        localStorage.setItem("currentRole",role);
         
-        if(role === "ADMIN"){
+        if(role === "Administrador"){
             navigation("/admin");
-
-        }else if(role === ""){
-            navigation("/");
-
-        }else{
-          navigation("/");
         }
+
+         if(role === "Gestor_de_reglas"){
+            navigation("/ruleManagement");
+        }
+
+        if(role === "Gestor_de_columnas"){
+          navigation("/attributeManagement");
+         }
+        if(role === "Gestor_de_registros"){
+           navigation("/recordManagement");
+         }
 
       }
         

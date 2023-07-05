@@ -1,7 +1,7 @@
 import Dropdown from "../../componente/Dropdown";
 import Header from "../../componente/Header";
 import FormInput from "../../componente/FormInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -30,6 +30,17 @@ function Createuser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+
+  useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+       
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,6 +88,9 @@ function Createuser() {
     navigation("/admin");
   }
 
+  if(currentUser !== "Administrador"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

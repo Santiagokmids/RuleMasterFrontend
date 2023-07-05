@@ -18,12 +18,24 @@ export default function AddColumn() {
 
   const navigation = useNavigate();
 
+  const [currentUser, setCurrentUser] = useState("");
+
   const selectOptions = [
     { label: "Texto", value: "varchar" },
     { label: "Numerica", value: "numeric" },
     { label: "Booleana", value: "boolean" }
   ];
   
+  useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+       
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
       try{
@@ -57,6 +69,9 @@ export default function AddColumn() {
     navigation("/attributeManagement");
   };
 
+  if(currentUser !== "Gestor_de_columnas"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

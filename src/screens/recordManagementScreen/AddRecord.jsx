@@ -10,6 +10,7 @@ import axios from "axios";
 export default function AddRecord() {
 
   const [tableData, setTableData] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const baseUrl="http://localhost:8091";
 
@@ -21,8 +22,15 @@ export default function AddRecord() {
  
   };
 
+  
+  useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
 
-  useEffect(()=>{
+    if(user){
+      setCurrentUser(user);
+    }
+    
     const fetchTable = async () => {
       const response = await axios.get(
           baseUrl + "/table/table_data",
@@ -85,6 +93,9 @@ export default function AddRecord() {
     navigation("/recordManagement");
   };
 
+  if(currentUser !== "Gestor_de_registros"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >

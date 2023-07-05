@@ -15,11 +15,18 @@ function ControlPanelAdmin() {
 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const navigation = useNavigate();
 
   useEffect(() => {
 
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+    
     async function getData() {
 
       const resultUsers = await getUsers();
@@ -33,6 +40,7 @@ function ControlPanelAdmin() {
     event.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -53,6 +61,10 @@ function ControlPanelAdmin() {
   const selectOptions = [
     { label: "Eliminar usuario", value: "Eliminar usuario" },
     ];
+
+    if(currentUser !== "Administrador"){
+      navigation("/NotFound");
+    }
 
   return (
     <div>

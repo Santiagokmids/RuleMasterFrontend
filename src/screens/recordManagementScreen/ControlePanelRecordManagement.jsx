@@ -25,9 +25,18 @@ function ControlePanelRecordManagement() {
   const [record, setRecord] = useState("");
   const [ruleSelected, setRuleSelected] = useState("");
 
+  const [currentUser, setCurrentUser] = useState("");
+
   const navigation = useNavigate();
 
   useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
+
     const fetchTable = async () => {
       var token=localStorage.getItem("jwt");
       const response = await axios.get(
@@ -48,6 +57,12 @@ function ControlePanelRecordManagement() {
   }, []);
 
   useEffect(() => {
+   
+    const user = localStorage.getItem("currentRole");
+
+    if(user){
+      setCurrentUser(user);
+    }
 
     async function getData() {
       const resultRules = await getRules();
@@ -78,6 +93,7 @@ function ControlePanelRecordManagement() {
     event.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.setItem("logged_user", JSON.stringify(false))
+    localStorage.removeItem('currentRole');
     navigation("/login");
   };
 
@@ -138,6 +154,10 @@ function ControlePanelRecordManagement() {
   const selectOptions = [
     { label: "Eliminar registro", value: "Eliminar registro" },
   ];
+
+  if(currentUser !== "Gesto_de_registros"){
+    navigation("/NotFound");
+  }
 
   return (
     <div >
