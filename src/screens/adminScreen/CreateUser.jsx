@@ -72,7 +72,7 @@ function Createuser() {
   
         if (response.status === 200) {
           alert("El usuario fue creado con éxito!");
-          navigation("/login");
+          navigation("/admin");
   
         }
       }

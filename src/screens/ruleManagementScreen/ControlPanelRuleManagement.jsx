@@ -384,7 +384,8 @@ export default function ControlPanelRuleManagement() {
     <div>
       <Header buttonText="Cerrar sesión" headerText="Panel de control" onClick={handleLogout}/>
       <div className="logicalContainer">
-        <h3>Datos</h3>
+        <br />
+        <h3>Registros</h3>
         <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "20rem", overflow: "auto", marginTop: "20px" }}>
             <div style={{ minWidth: "100%" }}>
               <table className="table table-bordered border-dark" style={{ tableLayout: "fixed" }}>

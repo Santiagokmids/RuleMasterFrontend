@@ -75,6 +75,8 @@ export default function ControlPanelRuleManagement() {
             <ButtonIcon marginL="1vw" marginT="1vw" text="Gestionar Columnas" w="36vw" h="6vh" img="reader-outline" />
             <Button onClick={handleCreateColumn} text="Agregar Columnas" w="36vw" h="6vh" marginL="1vw" marginT="1vw" />
           </div>
+          <br />
+          <p className="h2">Registros</p>
 
           <div className="table-responsive" style={{ maxWidth: "95%", maxHeight: "28rem", overflow: "auto", marginTop: "20px" }}>
             <div style={{ minWidth: "100%" }}>

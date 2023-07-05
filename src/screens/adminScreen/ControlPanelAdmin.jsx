@@ -80,7 +80,6 @@ function ControlPanelAdmin() {
 
         <div className="containerBase" style={{ width: "80vw" }}>
           <br />
-          <p className="h2">Usuarios registrados</p>
 
           <div className="containerBase2">
             <IconTextInput marginT="1.5vw" w="24vw" h="6vh" type="text" placeholder="Buscar Usuario" icon="search-outline" />
@@ -89,6 +88,8 @@ function ControlPanelAdmin() {
           </div>
 
           <br />
+          <p className="h2">Usuarios registrados</p>
+
           <div className="container">
             <br />
             <div className="table-responsive">
