@@ -19,9 +19,9 @@ function Createuser() {
 
   const selectOptions = [
     { label: "Administrador", value: "Administrador" },
-    { label: "Gestor de registros", value: "Gestor de registros" },
-    { label: "Gestor de reglas", value: "Gestor de reglas" },
-    { label: "Gestor de Columnas", value: "Gestor de Columnas" },
+    { label: "Gestor de registros", value: "Gestor_de_registros" },
+    { label: "Gestor de reglas", value: "Gestor_de_reglas" },
+    { label: "Gestor de columnas", value: "Gestor_de_columnas" },
   ];
 
   const [name, setName] = useState("");
