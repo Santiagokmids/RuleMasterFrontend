@@ -27,6 +27,7 @@ export default function AddColumn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/table/addColumn",
           {
             tableName:"table_data",
@@ -37,6 +38,7 @@ export default function AddColumn() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );

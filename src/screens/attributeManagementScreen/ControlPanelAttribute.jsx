@@ -16,12 +16,14 @@ export default function ControlPanelRuleManagement() {
 
   useEffect(() => {
     const fetchTable = async () => {
+      var token=localStorage.getItem("jwt");
       const response = await axios.get(
         baseUrl + "/table/table_data",
         {
           headers: {
             "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
+            "MediaType": "application/json",
+            Authorization: `Bearer ${token}` 
           }
         }
       );

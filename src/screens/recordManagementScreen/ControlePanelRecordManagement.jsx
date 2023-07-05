@@ -29,12 +29,14 @@ function ControlePanelRecordManagement() {
 
   useEffect(() => {
     const fetchTable = async () => {
+      var token=localStorage.getItem("jwt");
       const response = await axios.get(
         baseUrl + "/table/table_data",
         {
           headers: {
             "Access-Control-Allow-Origin": baseUrl,
-            "MediaType": "application/json"
+            "MediaType": "application/json",
+            Authorization: `Bearer ${token}` 
           }
         }
       );
@@ -100,11 +102,13 @@ function ControlePanelRecordManagement() {
     event.preventDefault();
     
     try{
+      var token=localStorage.getItem("jwt");
       const response = await axios.get(baseUrl + "/rules/evaluate/"+record+"/"+ruleSelected,
         {
           headers:{
             "Access-Control-Allow-Origin": baseUrl,
             "MediaType" : "application/json",
+            Authorization: `Bearer ${token}` 
           }
         }
       );
@@ -215,13 +219,14 @@ function ControlePanelRecordManagement() {
 }
 
 async function getRules(){
-
+  var token=localStorage.getItem("jwt");
   const rules = await axios.get(
     baseUrl+"/rules",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )
@@ -230,13 +235,14 @@ async function getRules(){
 }
 
 async function getRecords(){
-
+  var token=localStorage.getItem("jwt");
   const records = await axios.get(
     baseUrl+"/table/table_data",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )

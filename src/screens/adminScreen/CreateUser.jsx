@@ -37,6 +37,7 @@ function Createuser() {
     if(role !== ""){
 
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/users",
           {
             name,
@@ -49,6 +50,7 @@ function Createuser() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );

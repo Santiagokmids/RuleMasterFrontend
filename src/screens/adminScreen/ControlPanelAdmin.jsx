@@ -31,6 +31,8 @@ function ControlPanelAdmin() {
 
   const handleLogout = async (event) => {
     event.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.setItem("logged_user", JSON.stringify(false))
     navigation("/login");
   };
 
@@ -104,13 +106,14 @@ function ControlPanelAdmin() {
 }
 
 async function getUsers(){
-
+  var token=localStorage.getItem("jwt");
   const users = await axios.get(
     baseUrl+"/users",
     {
       headers:{
         "Access-Control-Allow-Origin": baseUrl,
         "MediaType" : "application/json",
+        Authorization: `Bearer ${token}` 
       }
     }
   )

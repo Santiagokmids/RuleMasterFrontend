@@ -4,7 +4,8 @@ import img from "../img/loginCoffee.jpg";
 import Button from "../componente/Button";
 import { useNavigate } from "react-router-dom";
 
-function Login(prop) {
+
+const Login = ({ setLogin }) =>{
   const navigation = useNavigate();
 
   const click = async (event) => {

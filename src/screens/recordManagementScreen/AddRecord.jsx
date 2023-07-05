@@ -56,6 +56,7 @@ export default function AddRecord() {
   const handleSubmit = async (event) => {
     event.preventDefault();
       try{
+        var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/table/addRecord",
           {
             tableName:"table_data",
@@ -65,6 +66,7 @@ export default function AddRecord() {
             headers:{
               "Access-Control-Allow-Origin": baseUrl,
               "MediaType" : "application/json",
+              Authorization: `Bearer ${token}` 
             }
           }
         );
