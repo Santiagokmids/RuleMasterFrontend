@@ -82,7 +82,7 @@ const Login = ({ setLogin }) =>{
           </div>
           <form onSubmit={handleSubmit}>
            <InputLogin 
-            marginT="1.5vw" w="24vw" h="6vh" type="text" 
+            marginT="1.5vw" w="24vw" h="6vh" type="email" 
             placeholder="Email" icon="at-outline" 
             value={username}
             onChange={u => setUsername(u)}                              
