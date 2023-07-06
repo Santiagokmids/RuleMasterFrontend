@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default function AddColumn() {
 
-  const baseUrl="http://localhost:8091";
+  const baseUrl="http://192.168.0.139:8091";
 
   const [name, setName] = useState("");
 

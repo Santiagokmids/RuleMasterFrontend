@@ -9,12 +9,12 @@ import Button from "../../componente/Button";
 import PopUpDropdown from "../../componente/PopUpDropdown";
 import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 
-const baseUrl = "http://localhost:8091"
+const baseUrl = "http://192.168.0.139:8091"
 
 function ControlePanelRecordManagement() {
   const [tableData, setTableData] = useState([]);
 
-  const baseUrl = "http://localhost:8091";
+  const baseUrl = "http://192.168.0.139:8091";
 
   const [rules, setRules] = useState([]);
   const [records, setRecords] = useState([]);

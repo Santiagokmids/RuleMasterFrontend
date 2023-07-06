@@ -9,7 +9,7 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 import Auth from "../../Auth";
 import axios from "axios";
 
-const baseUrl = "http://localhost:8091"
+const baseUrl = "http://192.168.0.139:8091"
 
 function ControlPanelAdmin() {
 
