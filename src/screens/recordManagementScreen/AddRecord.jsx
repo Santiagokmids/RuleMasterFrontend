@@ -15,7 +15,10 @@ export default function AddRecord() {
 
   
 
-  const baseUrl = "http://3.142.245.159:8091"  const navigation = useNavigate();
+  const baseUrl = "http://3.142.245.159:8091";
+  
+  
+  const navigation = useNavigate();
 
   const record = {
     
