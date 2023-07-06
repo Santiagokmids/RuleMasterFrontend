@@ -10,7 +10,7 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 
 
-const backUrl = process.env.BACK_END_URL;
+const backUrl = ${BACK_END_URL};
 
 const baseUrl = "http://"+backUrl+":8091"
 

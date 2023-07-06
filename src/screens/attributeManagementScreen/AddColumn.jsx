@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default function AddColumn() {
 
-  const backUrl = process.env.BACK_END_URL;
+  const backUrl = ${BACK_END_URL};
 
   const baseUrl = "http://"+backUrl+":8091"
 

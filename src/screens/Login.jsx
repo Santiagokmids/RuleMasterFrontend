@@ -8,7 +8,7 @@ import axios from "axios";
 import InputLogin from "../componente/InputLogin"
 
 
-const backUrl = process.env.BACK_END_URL;
+const backUrl = ${BACK_END_URL};
 
 const Login = ({ setLogin }) =>{
 
