@@ -42,6 +42,9 @@ export default function AddColumn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if(colType !== ""){
+      
       try{
         var token=localStorage.getItem("jwt");
         const response = await axios.post(baseUrl + "/table/addColumn",
@@ -65,7 +68,10 @@ export default function AddColumn() {
       }
       catch (error) {
         alert("No se pudo agregar la columna. "+error.response.data.details[0].errorMessage)
-      } 
+      }
+    }else{
+        alert("Debe seleccionar el tipo de columna que va a agregar");
+    }
   }
 
   const returnBack = async (event) => {
@@ -83,11 +89,13 @@ export default function AddColumn() {
       <body className="body">
         <div className="containerBase">
           <h1 className="mainTitle">Datos de columna</h1>
-          <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw" fontsize="1.2rem" value={name} onChange={newName => setName(newName)}/> 
-          <Dropdown selectOptions={selectOptions} h="6vh" w="35vw" t="4vh" optionD="Tipo" fontsize="1.2rem" value={colType} onChange={newType => setColType(newType)} />                
-          <div className="formComponent">
-            <Button h="5vh" w="34vw" text="Confirmar" onClick={handleSubmit} /> 
-          </div>
+          <form onSubmit={handleSubmit}>
+            <FormInput type="text" placeholder="Nombre" h="5vh" w="34vw" fontsize="1.2rem" value={name} onChange={newName => setName(newName)}/> 
+            <Dropdown selectOptions={selectOptions} h="6vh" w="35vw" t="4vh" optionD="Tipo" fontsize="1.2rem" value={colType} onChange={newType => setColType(newType)} />                
+            <div className="formComponent">
+              <Button h="5vh" w="34vw" text="Confirmar" type="submit" /> 
+            </div>
+          </form>
         </div>
       </body>
     </div>
