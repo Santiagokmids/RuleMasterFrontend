@@ -13,8 +13,7 @@ export default function AddColumn() {
 
   
 
-  const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com
-"
+  const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com"
 
   const [name, setName] = useState("");
 
