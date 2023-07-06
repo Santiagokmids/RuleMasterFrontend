@@ -6,7 +6,7 @@ import ButtonType1 from "../../componente/ButtonType1";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import 'dotenv/config'
+
 
 export default function ControlPanelRuleManagement() {
 

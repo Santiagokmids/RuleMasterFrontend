@@ -6,7 +6,7 @@ import Button from "../../componente/Button";
 import "./css/PanelControl.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import 'dotenv/config'
+
 
 export default function ControlPanelRuleManagement() {
   const navigation = useNavigate();
