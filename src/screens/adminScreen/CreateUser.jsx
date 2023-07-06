@@ -8,7 +8,7 @@ import axios from "axios";
 import "./css/CreateUser.css";
 import Button from "../../componente/Button";
 
-const baseUrl = "http://18.212.78.123:8091"
+const baseUrl = "http://localhost:8091"
 
 function Createuser() {
 

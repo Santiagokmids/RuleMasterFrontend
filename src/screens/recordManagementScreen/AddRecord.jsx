@@ -12,7 +12,7 @@ export default function AddRecord() {
   const [tableData, setTableData] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
-  const baseUrl="http://18.212.78.123:8091";
+  const baseUrl="http://localhost:8091";
 
   const navigation = useNavigate();
 
