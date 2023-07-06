@@ -11,10 +11,9 @@ import 'dotenv/config'
 
 export default function AddColumn() {
 
-  const backUrl = process.env.BACK_END_URL;
+  
 
-  const baseUrl = "http://"+backUrl+":8091"
-
+  const baseUrl = "http://3.142.245.159:8091"
   const [name, setName] = useState("");
 
   const [colType, setColType] = useState("");

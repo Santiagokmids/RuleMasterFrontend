@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../componente/Header";
 import { useNavigate } from "react-router-dom";
-import 'dotenv/config'
+
 import "./css/ControlPanel.css";
 import ButtonIcon from "../../componente/ButtonIcon";
 import IconTextInput from "../../componente/IconTextInput";
 import PopUpDropdown from "../../componente/PopUpDropdown";
 import Auth from "../../Auth";
 import axios from "axios";
-const backUrl = process.env.BACK_END_URL;
 
-const baseUrl = "http://"+backUrl+":8091"
-
+const baseUrl = "http://3.142.245.159:8091"
 function ControlPanelAdmin() {
 
   const [isPopupOpen, setPopupOpen] = useState(false);

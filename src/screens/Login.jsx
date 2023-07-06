@@ -8,7 +8,7 @@ import 'dotenv/config'
 import InputLogin from "../componente/InputLogin"
 
 
-const backUrl = process.env.BACK_END_URL;
+
 
 const Login = ({ setLogin }) =>{
 
@@ -17,8 +17,7 @@ const Login = ({ setLogin }) =>{
 
   const navigation = useNavigate();
 
-  const baseUrl = "http://"+backUrl+":8091"
-
+  const baseUrl = "http://3.142.245.159:8091"
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

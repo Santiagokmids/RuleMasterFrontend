@@ -10,15 +10,13 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 import 'dotenv/config'
 
-const backUrl = process.env.BACK_END_URL;
 
-const baseUrl = "http://"+backUrl+":8091"
 
+const baseUrl = "http://3.142.245.159:8091"
 function ControlePanelRecordManagement() {
   const [tableData, setTableData] = useState([]);
 
-  const baseUrl = "http://"+backUrl+":8091"
-
+  const baseUrl = "http://3.142.245.159:8091"
   const [rules, setRules] = useState([]);
   const [records, setRecords] = useState([]);
 

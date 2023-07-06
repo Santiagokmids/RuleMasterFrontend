@@ -4,14 +4,11 @@ import FormInput from "../../componente/FormInput";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import 'dotenv/config'
+
 import "./css/CreateUser.css";
 import Button from "../../componente/Button";
 
-const backUrl = process.env.BACK_END_URL;
-
-const baseUrl = "http://"+backUrl+":8091"
-
+const baseUrl = "http://3.142.245.159:8091"
 function Createuser() {
 
   const navigation = useNavigate();
