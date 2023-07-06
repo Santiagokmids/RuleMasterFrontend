@@ -12,11 +12,13 @@ import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 
 
 
-const baseUrl = "http://3.142.245.159:8091"
+const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com/"
+
 function ControlePanelRecordManagement() {
   const [tableData, setTableData] = useState([]);
 
-  const baseUrl = "http://3.142.245.159:8091"
+  const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com/"
+
   const [rules, setRules] = useState([]);
   const [records, setRecords] = useState([]);
 

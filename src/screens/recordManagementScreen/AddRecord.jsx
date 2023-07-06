@@ -15,7 +15,8 @@ export default function AddRecord() {
 
   
 
-  const baseUrl = "http://3.142.245.159:8091";
+  const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com/";
+
   
   
   const navigation = useNavigate();

@@ -9,7 +9,8 @@ import PopUpDropdown from "../../componente/PopUpDropdown";
 import Auth from "../../Auth";
 import axios from "axios";
 
-const baseUrl = "http://3.142.245.159:8091"
+const baseUrl = "http://lb-rulemaster-1959678376.us-east-2.elb.amazonaws.com/"
+
 function ControlPanelAdmin() {
 
   const [isPopupOpen, setPopupOpen] = useState(false);
