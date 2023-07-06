@@ -4,7 +4,7 @@ import FormInput from "../../componente/FormInput";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import 'dotenv/config'
 import "./css/CreateUser.css";
 import Button from "../../componente/Button";
 

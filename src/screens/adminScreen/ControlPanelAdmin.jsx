@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../componente/Header";
 import { useNavigate } from "react-router-dom";
-
+import 'dotenv/config'
 import "./css/ControlPanel.css";
 import ButtonIcon from "../../componente/ButtonIcon";
 import IconTextInput from "../../componente/IconTextInput";

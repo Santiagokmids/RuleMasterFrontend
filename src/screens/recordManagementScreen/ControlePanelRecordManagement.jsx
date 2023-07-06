@@ -8,7 +8,7 @@ import ButtonIcon from "../../componente/ButtonIcon";
 import Button from "../../componente/Button";
 import PopUpDropdown from "../../componente/PopUpDropdown";
 import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
-
+import 'dotenv/config'
 
 const backUrl = process.env.BACK_END_URL;
 
