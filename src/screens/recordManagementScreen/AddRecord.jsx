@@ -12,8 +12,9 @@ export default function AddRecord() {
   const [tableData, setTableData] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
-  const baseUrl="http://${BACK_END_URL}:8091";
+  const backUrl = process.env.BACK_END_URL;
 
+  const baseUrl = "http://"+backUrl+":8091"
   const navigation = useNavigate();
 
   const record = {
