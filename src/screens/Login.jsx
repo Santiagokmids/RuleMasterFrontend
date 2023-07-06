@@ -8,6 +8,8 @@ import axios from "axios";
 import InputLogin from "../componente/InputLogin"
 
 
+const backUrl = process.env.BACK_END_URL;
+
 const Login = ({ setLogin }) =>{
 
   const [username, setUsername] = useState("");
@@ -15,7 +17,7 @@ const Login = ({ setLogin }) =>{
 
   const navigation = useNavigate();
 
-  const baseUrl="http://${BACK_END_URL}:8091";
+  const baseUrl = "http://"+backUrl+":8091"
 
   const handleSubmit = async (event) => {
     event.preventDefault();

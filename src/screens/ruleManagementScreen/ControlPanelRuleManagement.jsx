@@ -38,7 +38,9 @@ export default function ControlPanelRuleManagement() {
   const [opColumn2, setOpColumn2] = useState(false)
   const [inputEnable, setInputEnable] = useState(false)
 
-  const baseUrl = "http://${BACK_END_URL}:8091";
+  const backUrl = process.env.BACK_END_URL;
+
+  const baseUrl = "http://"+backUrl+":8091"
 
   const navigation = useNavigate();
 

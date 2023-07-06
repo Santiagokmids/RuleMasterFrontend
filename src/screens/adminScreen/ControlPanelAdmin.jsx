@@ -8,8 +8,9 @@ import IconTextInput from "../../componente/IconTextInput";
 import PopUpDropdown from "../../componente/PopUpDropdown";
 import Auth from "../../Auth";
 import axios from "axios";
+const backUrl = process.env.BACK_END_URL;
 
-const baseUrl = "http://${BACK_END_URL}:8091"
+const baseUrl = "http://"+backUrl+":8091"
 
 function ControlPanelAdmin() {
 

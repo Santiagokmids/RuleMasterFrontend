@@ -9,12 +9,15 @@ import Button from "../../componente/Button";
 import PopUpDropdown from "../../componente/PopUpDropdown";
 import PopUpEvaluateRule from "../../componente/PopUpEvaluateRule";
 
-const baseUrl = "http://${BACK_END_URL}:8091"
+
+const backUrl = process.env.BACK_END_URL;
+
+const baseUrl = "http://"+backUrl+":8091"
 
 function ControlePanelRecordManagement() {
   const [tableData, setTableData] = useState([]);
 
-  const baseUrl = "http://${BACK_END_URL}:8091";
+  const baseUrl = "http://"+backUrl+":8091"
 
   const [rules, setRules] = useState([]);
   const [records, setRecords] = useState([]);
